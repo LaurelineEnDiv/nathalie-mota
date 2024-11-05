@@ -12,7 +12,7 @@
     <div class="site-logo">
         <!-- Ajoutez le logo ici -->
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="<?php bloginfo( 'name' ); ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/logo-nathalie-mota.png" alt="Logo de Nathalie Mota, Photographe">
         </a>
     </div>
     <nav class="main-navigation">
@@ -25,3 +25,6 @@
         ?>
     </nav>
 </header>
+
+<?php get_template_part('templates_part/contact'); // Inclure la modale de contact ?>
+

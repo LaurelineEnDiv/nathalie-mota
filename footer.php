@@ -4,7 +4,7 @@
     </div>
     <div class="site-info">
         <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Tous droits réservés.</p>
-        <p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Accueil</a> | <a href="/contact">Contact</a></p>
+        <p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Accueil</a></p>
     </div>
 </footer>
 
