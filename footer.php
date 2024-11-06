@@ -1,11 +1,15 @@
 <footer>
-    <div class="footer-widgets">
-        <!-- Placez les widgets de pied de page ou tout autre contenu ici -->
-    </div>
-    <div class="site-info">
-        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Tous droits réservés.</p>
-        <p><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Accueil</a></p>
-    </div>
+    <nav class="nav-menu">
+            <?php
+            wp_nav_menu( array(
+                'theme_location' => 'footer-menu', // Doit correspondre au nom du menu 
+                'menu_class'     => 'nav-menu', // Classe CSS pour le styliser si besoin
+            ) );
+            ?>
+            <li class="site-info">
+                Tous droits réservés
+            </li>
+    </nav>
 </footer>
 
 <?php wp_footer(); // Nécessaire pour les scripts et plugins WordPress ?>

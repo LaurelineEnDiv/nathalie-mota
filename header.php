@@ -10,7 +10,6 @@
 
 <header>
     <div class="site-logo">
-        <!-- Ajoutez le logo ici -->
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
             <img src="<?php echo get_template_directory_uri(); ?>/images/logo-nathalie-mota.png" alt="Logo de Nathalie Mota, Photographe">
         </a>
@@ -19,7 +18,7 @@
         <?php
         // Affiche le menu principal défini dans l’administration WordPress
         wp_nav_menu( array(
-            'theme_location' => 'main-menu', // Doit correspondre au nom du menu dans functions.php
+            'theme_location' => 'main-menu', 
             'menu_class'     => 'nav-menu',
         ) );
         ?>
