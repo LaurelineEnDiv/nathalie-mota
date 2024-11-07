@@ -47,13 +47,35 @@ header, footer {
 
 #contact-modal {
     display: none;
-    background-color: aqua;
-    margin: 0 20%;
-    padding: 2em;
+    max-width : 50%;
+    margin: auto;
+    border: 1px solid #ccc;
+}
+
+#contact-modal::before {
+    content: "";
+    display: block;
+    height: 150px; 
+    background-image: url("images/contact-header.png");
+    background-size: cover; 
+    background-position: center;
 }
 
 .contact-form {
     display: flex;
     justify-content: center;
-    
+    margin-top: 2em;
 }
+
+.contact-form .wpcf7-form-control {
+    width: 100%; 
+    max-width: 400px;
+    box-sizing: border-box;
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
