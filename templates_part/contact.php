@@ -1,3 +1,4 @@
+<div class="modal-overlay" id="modal-overlay"></div>
 <div id="contact-modal">
     <div class="contact-form">
         <?php

@@ -1,18 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("contact-modal");
     const contactLink = document.getElementById("contact-menu-link");
+    const overlay = document.getElementById("modal-overlay");
 
     // Ouvrir la modale lorsque le lien "Contact" est cliqué
     contactLink.addEventListener("click", function(event) {
-        event.preventDefault(); // Empêche le défilement vers le haut de la page
         modal.style.display = "block"; // Affiche la modale
-    });
-
-    // Fermer la modale en cliquant en dehors
-    window.addEventListener("click", function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+        overlay.style.display = "block"; // Affiche l'overlay
     });
 
     // Fermer la modale en cliquant sur un autre lien du menu
@@ -21,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (link !== contactLink) {
             link.addEventListener("click", function() {
                 modal.style.display = "none"; // Cache la modale
+                overlay.style.display = "none"; // Cache l'overlay
             });
         }
     });
