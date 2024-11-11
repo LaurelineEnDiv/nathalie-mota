@@ -43,25 +43,36 @@ header, footer {
     color: #fe5858;
 }
 
-/* Modale Contact */
+/********** Modale Contact ************/
 
-.modal-overlay {
-    display: none; 
+.modal-overlay { 
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     position: fixed;
     top: 100px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 100px); /* Hauteur de l’écran moins la hauteur du header */
-    background: rgba(0, 0, 0, 0.5); 
-    z-index: 1; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); 
+    z-index: 1;
 }
 
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease; /* Transition en fondu */
+}
+
+
 #contact-modal {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     position: fixed;
     top: 20%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%, 50px);
     width: 50%;
     max-height: calc(100vh - 150px); /* Limite la hauteur de la modale pour permettre le défilement */
     overflow-y: auto; /* Active le défilement vertical si le contenu dépasse */
@@ -69,6 +80,13 @@ header, footer {
     border: 1px solid #ccc;
     z-index: 2; 
 }
+
+#contact-modal.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, 0); /* Position finale pour l'animation */
+}
+
 
 #contact-modal::before {
     content: "";

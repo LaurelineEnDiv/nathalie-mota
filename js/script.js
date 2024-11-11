@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Ouvrir la modale lorsque le lien "Contact" est cliqué
     contactLink.addEventListener("click", function(event) {
-        modal.style.display = "block"; // Affiche la modale
-        overlay.style.display = "block"; // Affiche l'overlay
+        modal.classList.add("active");
+        overlay.classList.add("active");
     });
 
     // Fermer la modale en cliquant sur un autre lien du menu
@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
     navLinks.forEach(link => {
         if (link !== contactLink) {
             link.addEventListener("click", function() {
-                modal.style.display = "none"; // Cache la modale
-                overlay.style.display = "none"; // Cache l'overlay
+                modal.classList.remove("active"); // Cache la modale
+                overlay.classList.remove("active"); // Cache l'overlay
             });
         }
     });
