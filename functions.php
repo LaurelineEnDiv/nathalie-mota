@@ -14,7 +14,7 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 
 
 // Enregistre les emplacements de menus
-function mon_theme_register_menus() {
+function theme_register_menus() {
     register_nav_menus(
         array(
             'main-menu' => 'Menu Principal',
@@ -22,7 +22,7 @@ function mon_theme_register_menus() {
         )
     );
 }
-add_action( 'init', 'mon_theme_register_menus' );
+add_action( 'init', 'theme_register_menus' );
 
 // si le titre du menu est "Contact", ajoute un identifiant contact-menu-link au lien pour activer la modale.
 function add_contact_menu_id($atts, $item, $args) {

@@ -45,13 +45,13 @@ header, footer {
   visibility: hidden;
   opacity: 0;
   position: fixed;
-  top: 100px;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   z-index: 1;
-  transition: opacity 0.5s ease;
+  pointer-events: auto; /* Assure que l'overlay capte bien le clic */
 }
 .modal-overlay.active {
   visibility: visible;
@@ -62,29 +62,36 @@ header, footer {
   visibility: hidden;
   opacity: 0;
   position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%, 50px);
-  width: 50%;
-  max-height: calc(100vh - 150px); /* Limite la hauteur de la modale pour permettre le défilement */
-  overflow-y: auto; /* Active le défilement vertical si le contenu dépasse */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none; /* Évite que la modale capte les clics */
+}
+#contact-modal .modal-content {
   background-color: white;
   border: 1px solid #ccc;
-  z-index: 2;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh; /* Limite la hauteur de la modale pour permettre le défilement */
+  overflow-y: auto; /* Active le défilement à l’intérieur de la modale */
+  box-sizing: border-box;
 }
-#contact-modal.active {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-#contact-modal::before {
+#contact-modal .modal-content::before {
   content: "";
   display: block;
   height: 150px;
   background-image: url("images/contact-header.png");
   background-size: cover;
   background-position: center;
+}
+#contact-modal.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .contact-form {
