@@ -43,36 +43,62 @@ if ( have_posts() ) :
         </figure>
 
         <div class="interaction-photo">
+            
             <div class="contact-photo">
                 <p>Cette photo vous intéresse ?</p>
                 <button>Contact</button>
             </div>
             
-            <div class="photo-navigation">
-                <?php 
-                // Photo précédente
-                $prev_post = get_previous_post();
-                if ( $prev_post ) : 
-                    $prev_thumbnail = get_the_post_thumbnail( $prev_post->ID, 'thumbnail' ); // Miniature du post précédent
+            <div class="photo-container">
+                <!-- Afficher la photo actuelle en miniature -->
+                <div class="photo-current">
+                    <?php if ( has_post_thumbnail() ) : ?>
+                        <?php the_post_thumbnail('thumbnail'); ?>
+                    <?php else : ?>
+                        <p>Aucune image disponible pour cette photo.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Navigation avec flèches -->
+                <div class="photo-navigation">
+                    <?php
+                    // Boucle des posts du Custom Post Type "photo"
+                    $args = array(
+                        'post_type' => 'photo',
+                        'posts_per_page' => -1, // Charge toutes les photos
+                        'orderby' => 'date', // Tri par date
+                        'order' => 'ASC', // Ordre ascendant
+                    );
+
+                    $photos_query = new WP_Query($args);
+
+                    // Trouver l'index de la photo actuelle
+                    $current_id = get_the_ID();
+                    $photos = $photos_query->posts;
+                    $current_index = array_search($current_id, wp_list_pluck($photos, 'ID'));
+
+                    // Index des photos suivante et précédente
+                    $prev_index = $current_index > 0 ? $current_index - 1 : count($photos) - 1; // Boucle si en début de liste
+                    $next_index = ($current_index + 1) % count($photos); // Boucle si en fin de liste
+
+                    // Post précédent
+                    $prev_post = $photos[$prev_index];
                     ?>
-                    <a href="<?php echo get_permalink( $prev_post->ID ); ?>" class="nav-prev" title="<?php echo esc_attr( get_the_title( $prev_post->ID ) ); ?>">
-                        <span class="nav-thumbnail"><?php echo $prev_thumbnail; ?></span>
+                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-prev" title="Photo précédente">
                         &#x2190; <!-- Flèche gauche -->
                     </a>
-                <?php endif; ?>
 
-                <?php 
-                // Photo suivante
-                $next_post = get_next_post();
-                if ( $next_post ) : 
-                    $next_thumbnail = get_the_post_thumbnail( $next_post->ID, 'thumbnail' ); // Miniature du post suivant
+                    <?php
+                    // Post suivant
+                    $next_post = $photos[$next_index];
                     ?>
-                    <a href="<?php echo get_permalink( $next_post->ID ); ?>" class="nav-next" title="<?php echo esc_attr( get_the_title( $next_post->ID ) ); ?>">
+                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-next" title="Photo suivante">
                         &#x2192; <!-- Flèche droite -->
-                        <span class="nav-thumbnail"><?php echo $next_thumbnail; ?></span>
                     </a>
-                <?php endif; ?>
+                </div>
             </div>
+
+
         </div>
 
     <?php 
