@@ -62,22 +62,20 @@ header, footer {
   visibility: hidden;
   opacity: 0;
   position: fixed;
-  top: 0;
+  top: 150px;
   left: 0;
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   z-index: 2;
-  pointer-events: none; /* Évite que la modale capte les clics */
 }
 #contact-modal .modal-content {
   background-color: white;
   border: 1px solid #ccc;
   max-width: 600px;
   width: 100%;
-  max-height: 80vh; /* Limite la hauteur de la modale pour permettre le défilement */
+  max-height: 80vh;
   overflow-y: auto; /* Active le défilement à l’intérieur de la modale */
   box-sizing: border-box;
 }
