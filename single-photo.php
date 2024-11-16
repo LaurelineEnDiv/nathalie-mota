@@ -17,26 +17,26 @@ if ( have_posts() ) :
         ?>
         
         <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <h1><?php the_title(); ?></h1>
-            <div class="photo-meta">
-                <p>Référence : <?php echo $ref; ?></p>
-                <p>Catégorie : 
-                    <?php
-                    foreach ($categories as $categorie) {
-                        echo $categorie->name . ' '; // Affiche le nom du terme
-                    }
-                    ?>
-                </p> 
-                <p>Format : 
-                    <?php
-                    foreach ($formats as $format) {
-                        echo $format->name . ' '; 
-                    }
-                    ?>
-                </p>
-                <p>Type : <?php echo $type; ?></p> 
-                <p>Année : <?php echo $annee; ?></p>
+            <div class="photo-infos">
+                <h1><?php the_title(); ?></h1>
+                <div class="photo-meta">
+                    <p>Référence : <?php echo $ref; ?></p>
+                    <p>Catégorie : <?php
+                        foreach ($categories as $categorie) {
+                            echo $categorie->name . ' '; // Affiche le nom du terme
+                        } ?>
+                    </p> 
+                    <p>Format : <?php
+                        foreach ($formats as $format) {
+                            echo $format->name . ' '; 
+                        } ?>
+                    </p>
+                    <p>Type : <?php echo $type; ?></p> 
+                    <p>Année : <?php echo $annee; ?></p>
+                    <div class="separator"></div>
+                </div>
             </div>
+
             <div class="photo">
                 <?php the_content(); ?>
             </div>

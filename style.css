@@ -12,6 +12,10 @@ header, footer {
   padding: 20px 0;
 }
 
+.separator {
+  border: solid 0.5px #000000;
+}
+
 /******** Navigation ********/
 .site-logo img {
   width: 216px;
@@ -105,4 +109,27 @@ header, footer {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+/********* Sinngle-Photo ***********/
+figure {
+  display: flex;
+  align-items: flex-end;
+}
+figure .photo-infos {
+  width: 50%;
+  padding: 1em;
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+figure .photo {
+  padding: 1em;
+}
+figure .photo figure.wp-block-image {
+  margin-bottom: 0;
+}
+
+.interaction-photo {
+  height: 118px;
+  padding: 1em;
+  display: flex;
 }/*# sourceMappingURL=style.css.map */

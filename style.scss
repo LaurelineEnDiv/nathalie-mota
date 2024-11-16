@@ -19,6 +19,10 @@ header, footer {
     padding: 20px 0;
 }
 
+.separator {
+    border: solid 0.5px #000000;
+}
+
 /******** Navigation ********/
 .site-logo img {
     width: 216px;
@@ -124,3 +128,35 @@ header, footer {
         border-radius: 5px;
     }
 }
+
+/********* Sinngle-Photo ***********/
+
+figure {
+    display: flex; 
+    align-items: flex-end;
+
+    .photo-infos {   
+        width: 50%; 
+        padding : 1em;
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    }
+
+    .photo {
+        padding : 1em;
+
+        figure.wp-block-image {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.interaction-photo {
+    height: 118px;
+    padding : 1em;
+    display: flex;
+}
+
+
+
+
+
