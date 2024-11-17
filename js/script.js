@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("contact-modal");
     const contactLink = document.getElementById("contact-menu-link");
+    const modal = document.getElementById("contact-modal");
     const overlay = document.getElementById("modal-overlay");
-    const modalContent = document.querySelector("#contact-modal .modal-content");
 
     // Ouvrir la modale lorsque le lien "Contact" est cliqué
     contactLink.addEventListener("click", () => {
