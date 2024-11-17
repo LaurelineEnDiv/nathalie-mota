@@ -12,8 +12,16 @@ header, footer {
   padding: 20px 0;
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
 .separator {
   border: solid 0.5px #000000;
+}
+.separator.margin {
+  margin: 1em;
 }
 
 /******** Navigation ********/
@@ -115,6 +123,7 @@ header, footer {
 figure {
   display: flex;
   align-items: flex-end;
+  margin-bottom: 0;
 }
 figure .photo-infos {
   width: 50%;
@@ -130,6 +139,34 @@ figure .photo figure.wp-block-image {
 
 .interaction-photo {
   height: 118px;
-  padding: 1em;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.interaction-photo .contact-photo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  padding: 1em;
+}
+.interaction-photo .contact-photo a {
+  padding: 1em 7em;
+  background-color: #D8D8D8;
+  border-radius: 2px;
+}
+.interaction-photo .thumbnail-container {
+  padding: 1em;
+}
+.interaction-photo .thumbnail-container .thumbnail-current img {
+  height: 71px;
+  width: auto;
+}
+.interaction-photo .thumbnail-container .photo-navigation {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.interaction-photo .thumbnail-container .photo-navigation a {
+  font-size: 25px;
 }/*# sourceMappingURL=style.css.map */

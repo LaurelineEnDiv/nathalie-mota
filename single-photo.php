@@ -46,12 +46,12 @@ if ( have_posts() ) :
             
             <div class="contact-photo">
                 <p>Cette photo vous intéresse ?</p>
-                <button>Contact</button>
+                <a href="#">Contact</a>
             </div>
             
-            <div class="photo-container">
+            <div class="thumbnail-container">
                 <!-- Afficher la photo actuelle en miniature -->
-                <div class="photo-current">
+                <div class="thumbnail-current">
                     <?php if ( has_post_thumbnail() ) : ?>
                         <?php the_post_thumbnail('thumbnail'); ?>
                     <?php else : ?>
@@ -98,8 +98,8 @@ if ( have_posts() ) :
                 </div>
             </div>
 
-
         </div>
+        <div class="separator margin"></div>
 
     <?php 
     endwhile; 
