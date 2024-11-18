@@ -50,13 +50,9 @@ if ( have_posts() ) :
             </div>
             
             <div class="thumbnail-container">
-                <!-- Afficher la photo actuelle en miniature -->
+                <!-- Afficher la photo miniature -->
                 <div class="thumbnail-current">
-                    <?php if ( has_post_thumbnail() ) : ?>
-                        <?php the_post_thumbnail('thumbnail'); ?>
-                    <?php else : ?>
-                        <p>Aucune image disponible pour cette photo.</p>
-                    <?php endif; ?>
+                    <img src="" id="thumbnail-current-img">
                 </div>
 
                 <!-- Navigation avec flèches -->
@@ -83,16 +79,24 @@ if ( have_posts() ) :
 
                     // Post précédent
                     $prev_post = $photos[$prev_index];
-                    ?>
-                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-prev" title="Photo précédente">
-                        &#x2190; <!-- Flèche gauche -->
-                    </a>
+                    $prev_thumbnail = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail');
 
-                    <?php
                     // Post suivant
                     $next_post = $photos[$next_index];
+                    $next_thumbnail = get_the_post_thumbnail_url($next_post->ID, 'thumbnail');
                     ?>
-                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-next" title="Photo suivante">
+
+                    <a href="<?php echo get_permalink($prev_post->ID); ?>" 
+                    class="nav-prev" 
+                    title="Photo précédente"
+                    data-thumbnail="<?php echo esc_url($prev_thumbnail); ?>">
+                        &#x2190; <!-- Flèche gauche -->
+                    </a>
+                    
+                    <a href="<?php echo get_permalink($next_post->ID); ?>" 
+                        class="nav-next" 
+                        title="Photo suivante" 
+                        data-thumbnail="<?php echo esc_url($next_thumbnail); ?>">
                         &#x2192; <!-- Flèche droite -->
                     </a>
                 </div>
