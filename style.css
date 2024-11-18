@@ -5,13 +5,6 @@ body {
   font-family: "Space Mono", monospace;
 }
 
-header, footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 0;
-}
-
 a {
   text-decoration: none;
   color: #000000;
@@ -24,8 +17,17 @@ a {
   margin: 1em;
 }
 
+h1, .title {
+  text-transform: uppercase;
+}
+
 /******** Navigation ********/
-.site-logo img {
+header {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+header .site-logo img {
   width: 216px;
   max-height: 60px;
 }
@@ -48,6 +50,13 @@ a {
 }
 .nav-menu a:hover, .nav-menu .site-info:hover {
   color: #fe5858;
+}
+
+footer .nav-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
 }
 
 /********** Modale Contact ************/
@@ -108,22 +117,33 @@ a {
   border-radius: 5px;
 }
 
-/********* Sinngle-Photo ***********/
+/********* Single-Photo ***********/
 figure {
   display: flex;
   align-items: flex-end;
   margin-bottom: 0;
 }
 figure .photo-infos {
-  width: 50%;
+  flex: 1 1 50%;
   padding: 1em;
   box-sizing: border-box;
 }
+figure .photo-infos h1 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 66px;
+  line-height: 58px;
+  margin: 20px 0px;
+}
 figure .photo {
   padding: 1em;
+  flex: 1 1 50%;
 }
 figure .photo figure.wp-block-image {
   margin-bottom: 0;
+}
+figure .photo p {
+  margin: 0;
 }
 
 .interaction-photo {
@@ -136,7 +156,7 @@ figure .photo figure.wp-block-image {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  flex: 1 1 50%;
   padding: 1em;
 }
 .interaction-photo .contact-photo a {
@@ -144,18 +164,45 @@ figure .photo figure.wp-block-image {
   background-color: #D8D8D8;
   border-radius: 2px;
 }
-.interaction-photo .thumbnail-container {
+.interaction-photo .nav-photos {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1 50%;
   padding: 1em;
 }
-.interaction-photo .thumbnail-container .thumbnail-current img {
+.interaction-photo .nav-photos .thumbnail-current img {
   height: 71px;
   width: auto;
 }
-.interaction-photo .thumbnail-container .photo-navigation {
+.interaction-photo .nav-photos .photo-navigation {
   display: flex;
   justify-content: space-between;
   text-align: center;
 }
-.interaction-photo .thumbnail-container .photo-navigation a {
+.interaction-photo .nav-photos .photo-navigation a {
   font-size: 25px;
+}
+
+.similar-photos {
+  margin: 40px 0px;
+  padding: 1em;
+}
+
+.similar-photos-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+.similar-photo-item {
+  flex: 1 1 50%;
+}
+
+.similar-photo-item img {
+  width: 100%;
+  height: 500px;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=style.css.map */
