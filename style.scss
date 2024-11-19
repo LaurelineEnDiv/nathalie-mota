@@ -53,7 +53,7 @@ header {
         font-size: 16px;
 
         &:hover {
-            color: #fe5858;
+            font-weight: bold;
         }
     }
 }
@@ -78,10 +78,13 @@ footer .nav-menu {
     background: rgba(0, 0, 0, 0.8); 
     z-index: 1;
     pointer-events: auto; /* Assure que l'overlay capte bien le clic */
+    transition: opacity 0.5s ease, linear 0.5s; /* Transition de 0.3s */
+
 
     &.active {
         visibility: visible;
         opacity: 1;
+        transition: opacity 0.5s ease, linear 0s; /* Transition immédiate */
     }
 }
 
@@ -95,8 +98,10 @@ footer .nav-menu {
     width: 60%;
     max-height: 80%; /* Limite la hauteur totale visible */
     background-color: white;
+    border: solid 2px $black;
     z-index: 2;
     overflow-y: auto; 
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s; 
     
         &::before {
             content: "";
@@ -110,6 +115,7 @@ footer .nav-menu {
         &.active {
             visibility: visible;
             opacity: 1;
+            transition: opacity 0.5s ease, visibility 0s linear 0s; /* Transition immédiate */
         }
     
     .contact-form {
