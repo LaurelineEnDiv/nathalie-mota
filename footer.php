@@ -1,10 +1,10 @@
 <footer>
     <div class="separator"></div>
-    <nav class="nav-menu">
+    <nav class="footer-menu">
             <?php
             wp_nav_menu( array(
-                'theme_location' => 'footer-menu', // Doit correspondre au nom du menu 
-                'menu_class'     => 'nav-menu', // Classe CSS pour le styliser si besoin
+                'theme_location' => 'footer-menu', 
+                'menu_class'     => 'footer-menu', 
             ) );
             ?>
             <li class="site-info">

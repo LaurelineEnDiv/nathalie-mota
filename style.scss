@@ -1,5 +1,7 @@
+
 // Variables
 $black: #000000;
+$mobile: 768px;
 
 /******* Style général *******/
 body {
@@ -16,6 +18,11 @@ a {
     border: solid 0.5px $black;
         &.margin {
             margin: 1em;
+
+            @media (max-width: $mobile) {
+                margin: 0;
+                margin-top: 2em;
+            }
         }
 }
 
@@ -24,6 +31,8 @@ h1, .title {
 }
 
 /******** Navigation ********/
+
+///////// Header ////////
 header {
     display: flex;
     justify-content: space-around;
@@ -35,7 +44,8 @@ header {
     }
 }
 
-.nav-menu {
+//////// Nav Header + Footer ////////
+.header-menu, .footer-menu {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -58,11 +68,105 @@ header {
     }
 }
 
-footer .nav-menu {
+/******** Menu burger ********/
+.burger-menu {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: $black;
+        border-radius: 2px;
+        transition: transform 0.3s, opacity 0.3s;
+    }
+
+    &.active span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    &.active span:nth-child(2) {
+        opacity: 0;
+    }
+    &.active span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+}
+
+.header-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width: $mobile) {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: red;
+        color: white;
+        flex-direction: column;
+        padding: 20px 0;
+        gap: 10px;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease-in-out;
+
+        &.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        a {
+            color: white;
+            text-transform: uppercase;
+            padding: 10px;
+            font-size: 16px;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+/******** Afficher le menu burger uniquement sur mobile ********/
+@media (max-width: $mobile) {
+    .burger-menu {
+        display: flex;
+    }
+
+    .header-menu {
+        display: none; // Cacher la navigation desktop
+    }
+}
+
+
+//////// Footer ////////////
+.footer-menu {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px 0;
+
+    @media (max-width: $mobile) {
+        flex-direction: column;
+    }
+
+    .site-info {
+        @media (max-width: $mobile) {
+            margin-top: -20px;
+        }
+    }
 }
 
 /********** Modale Contact ************/
@@ -144,6 +248,7 @@ figure {
 
     .photo-infos {   
         flex: 1 1 50%;
+        width: 100%;
         padding : 1em;
         box-sizing: border-box; 
 
@@ -153,6 +258,23 @@ figure {
             font-size: 66px;
             line-height: 58px;
             margin: 20px 0px;
+            max-width: 100%; 
+            word-break: break-word;
+
+            @media (max-width: $mobile) {
+                font-size: 46px;
+                line-height: 48px;
+            }
+        }
+
+        .title {
+            @media (max-width: $mobile) {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: $mobile) {
+            width:100%;
         }
     }
 
@@ -167,6 +289,11 @@ figure {
         p {
             margin:0
         }
+    }
+
+    @media (max-width: $mobile) {
+        flex-direction: column-reverse;
+        align-items: start;
     }
 }
 
@@ -187,6 +314,10 @@ figure {
         padding : 1em 7em;
         background-color: #D8D8D8;
         border-radius: 2px;
+        }
+
+        @media (max-width: $mobile) {
+            flex-direction: column;
         }
     }
 
@@ -210,12 +341,23 @@ figure {
                     font-size: 25px;
                     }
             }
+
+            @media (max-width: $mobile) {
+                display: none;
+            }
         }
     }
 
 .similar-photos {
     margin: 40px 0px;
     padding: 1em;
+
+    @media (max-width: $mobile) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
 }
 
 .similar-photos-container {
@@ -223,6 +365,11 @@ figure {
     gap: 20px;
     justify-content: space-between;
     margin-top: 2em;
+
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        margin-top: 0;
+    }
 }
 
 .similar-photo-item {

@@ -14,12 +14,17 @@
             <img src="<?php echo get_template_directory_uri(); ?>/images/logo-nathalie-mota.png" alt="Logo de Nathalie Mota, Photographe">
         </a>
     </div>
-    <nav class="main-navigation">
+    <button class="burger-menu" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav class="nav-wrapper">
         <?php
         // Affiche le menu principal défini dans l’administration WordPress
         wp_nav_menu( array(
             'theme_location' => 'main-menu', 
-            'menu_class'     => 'nav-menu',
+            'menu_class'     => 'header-menu',
         ) );
         ?>
     </nav>

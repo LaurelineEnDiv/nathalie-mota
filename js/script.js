@@ -1,3 +1,14 @@
+/////////// Menu Burger ///////////
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.querySelector('.burger-menu');
+    const navMenu = document.querySelector('.header-menu');
+
+    burgerMenu.addEventListener('click', () => {
+        burgerMenu.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+});
+
 /////////// Gestion Modale Contact ///////////
 document.addEventListener("DOMContentLoaded", function() {
     const contactLink = document.getElementById("contact-menu-link");
@@ -14,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
     
-    // Ouvrir la modale lorsque le lien "Contact" est cliqué
+    // Ouvrir la modale depuis le menu
     contactLink.addEventListener("click", () => {
         resetPhotoReferenceField(); // Ne pas préremplir
         modal.classList.add("active");
@@ -23,14 +34,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Ouvrir la modale depuis une page photo 
-        photoContactButton.addEventListener("click", () => {
-            if (photoReferenceField) {
-                photoReferenceField.value = ref; // Préremplir le champ avec la référence
-            }
-            modal.classList.add("active");
-            overlay.classList.add("active");
-            document.body.style.overflow = 'hidden';
-        });
+    photoContactButton.addEventListener("click", () => {
+        if (photoReferenceField) {
+            photoReferenceField.value = ref; // Préremplir le champ avec la référence
+        }
+        modal.classList.add("active");
+        overlay.classList.add("active");
+        document.body.style.overflow = 'hidden';
+    });
 
     // Fermer la modale en cliquant sur l'overlay (zone en dehors de la modale)
     overlay.addEventListener("click", () => {
@@ -39,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.overflow = ''; // Réactive le défilement
     });  
 });
+
 
 /////////// Gestion navigation image miniature ///////////
 document.addEventListener('DOMContentLoaded', () => {

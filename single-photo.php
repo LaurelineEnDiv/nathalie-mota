@@ -33,8 +33,8 @@ if ( have_posts() ) :
                     </p>
                     <p class="title">Type : <?php echo $type; ?></p> 
                     <p class="title">Année : <?php echo $annee; ?></p>
-                    <div class="separator"></div>
                 </div>
+                <div class="separator"></div>
             </div>
 
             <div class="photo">
