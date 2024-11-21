@@ -1,7 +1,7 @@
 <?php
 //Charge le fichier style.css
 function theme_enqueue_styles() {
-    wp_enqueue_style('style', get_stylesheet_uri());
+    wp_enqueue_style('main-style', get_template_directory_uri() . '/css/style.css');
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
