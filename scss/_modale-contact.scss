@@ -1,0 +1,69 @@
+/********** Modale Contact ************/
+
+.modal-overlay { 
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; // toute la largeur visible
+    height: 100vh; // toute la hauteur visible
+    background: rgba(0, 0, 0, 0.8); 
+    z-index: 1;
+    pointer-events: auto; /* Assure que l'overlay capte bien le clic */
+    transition: opacity 0.5s ease, linear 0.5s; /* Transition de 0.3s */
+
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.5s ease, linear 0s; /* Transition immédiate */
+    }
+}
+
+#contact-modal {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%); /* Centre uniquement horizontalement */
+    width: 60%;
+    max-height: 80%; /* Limite la hauteur totale visible */
+    background-color: white;
+    border: solid 2px $black;
+    z-index: 2;
+    overflow-y: auto; 
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s; 
+    
+        &::before {
+            content: "";
+            display: block;
+            height: 150px; 
+            background-image: url("../images/contact-header.png");
+            background-size: cover; 
+            background-position: center;
+        }
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.5s ease, visibility 0s linear 0s; /* Transition immédiate */
+        }
+    
+    .contact-form {
+        display: flex;
+        justify-content: center;
+        margin-top: 2em;
+        
+        .wpcf7-form-control {
+            width: 100%; 
+            max-width: 400px;
+            box-sizing: border-box;
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    }
+}
