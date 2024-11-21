@@ -15,32 +15,32 @@ if ( have_posts() ) :
         // Récupération année (date de publication)
         $annee = get_the_date('Y');
         ?>
-        
-        <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <div class="photo-infos">
-                <h1><?php the_title(); ?></h1>
-                <div class="photo-meta">
-                    <p class="title">Référence : <?php echo $ref; ?></p>
-                    <p class="title">Catégorie : <?php
-                        foreach ($categories as $categorie) {
-                            echo $categorie->name . ' '; // Affiche le nom du terme
-                        } ?>
-                    </p> 
-                    <p class="title">Format : <?php
-                        foreach ($formats as $format) {
-                            echo $format->name . ' '; 
-                        } ?>
-                    </p>
-                    <p class="title">Type : <?php echo $type; ?></p> 
-                    <p class="title">Année : <?php echo $annee; ?></p>
+        <div class="container">
+            <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <div class="photo-infos">
+                    <h1><?php the_title(); ?></h1>
+                    <div class="photo-meta">
+                        <p class="title">Référence : <?php echo $ref; ?></p>
+                        <p class="title">Catégorie : <?php
+                            foreach ($categories as $categorie) {
+                                echo $categorie->name . ' '; // Affiche le nom du terme
+                            } ?>
+                        </p> 
+                        <p class="title">Format : <?php
+                            foreach ($formats as $format) {
+                                echo $format->name . ' '; 
+                            } ?>
+                        </p>
+                        <p class="title">Type : <?php echo $type; ?></p> 
+                        <p class="title">Année : <?php echo $annee; ?></p>
+                    </div>
+                    <div class="separator margin"></div>
                 </div>
-                <div class="separator"></div>
-            </div>
-
             <div class="photo">
                 <?php the_content(); ?>
             </div>
-        </figure>
+            </figure>
+        
 
         <div class="interaction-photo">
             <div class="contact-photo">
@@ -100,7 +100,7 @@ if ( have_posts() ) :
             </div>
 
         </div>
-        <div class="separator margin"></div>
+        <div class="separator"></div>
 
     <div class="similar-photos">
         <p class="title">Vous aimerez aussi</p>
@@ -144,7 +144,8 @@ if ( have_posts() ) :
             ?>
         </div>
     </div>
-
+    </div>
+    </div>
     <?php 
     endwhile;
     endif;

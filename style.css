@@ -3,6 +3,11 @@
 body {
   color: #000000;
   font-family: "Space Mono", monospace;
+  margin: 0;
+}
+
+.container {
+  margin: 0 4em;
 }
 
 a {
@@ -14,12 +19,18 @@ a {
   border: solid 0.5px #000000;
 }
 .separator.margin {
-  margin: 1em;
+  margin-right: 1em;
 }
 @media (max-width: 768px) {
   .separator.margin {
-    margin: 0;
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .separator {
     margin-top: 2em;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Centre sur l'écran */
   }
 }
 
@@ -31,8 +42,8 @@ h1, .title {
 header {
   position: relative;
   display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
+  justify-content: space-between;
+  padding: 2em 4em;
 }
 header .site-logo img {
   width: 216px;
@@ -207,7 +218,6 @@ figure {
 figure .photo-infos {
   flex: 1 1 50%;
   width: 100%;
-  padding: 1em;
   box-sizing: border-box;
 }
 figure .photo-infos h1 {
@@ -215,7 +225,8 @@ figure .photo-infos h1 {
   font-weight: 400;
   font-size: 66px;
   line-height: 58px;
-  margin: 20px 0px;
+  margin: 20px 0;
+  padding-right: 1rem;
   max-width: 100%;
   word-break: break-word;
 }
@@ -236,7 +247,6 @@ figure .photo-infos h1 {
   }
 }
 figure .photo {
-  padding: 1em;
   flex: 1 1 50%;
 }
 figure .photo figure.wp-block-image {
@@ -263,7 +273,6 @@ figure .photo p {
   justify-content: space-between;
   align-items: center;
   flex: 1 1 50%;
-  padding: 1em;
 }
 .interaction-photo .contact-photo a {
   padding: 1em 7em;
@@ -279,16 +288,15 @@ figure .photo p {
   display: flex;
   justify-content: flex-end;
   flex: 1 1 50%;
-  padding: 1em;
+  margin-top: 1rem;
 }
 .interaction-photo .nav-photos .thumbnail-current img {
   height: 71px;
-  width: auto;
+  width: 81px;
 }
 .interaction-photo .nav-photos .photo-navigation {
   display: flex;
   justify-content: space-between;
-  text-align: center;
 }
 .interaction-photo .nav-photos .photo-navigation a {
   font-size: 25px;
@@ -301,7 +309,6 @@ figure .photo p {
 
 .similar-photos {
   margin: 40px 0px;
-  padding: 1em;
 }
 @media (max-width: 768px) {
   .similar-photos {
