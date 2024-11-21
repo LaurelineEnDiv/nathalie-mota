@@ -15,7 +15,7 @@ if ( have_posts() ) :
         // Récupération année (date de publication)
         $annee = get_the_date('Y');
         ?>
-        <div class="container">
+        <div class="container single-photo">
             <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <div class="photo-infos">
                     <h1><?php the_title(); ?></h1>
