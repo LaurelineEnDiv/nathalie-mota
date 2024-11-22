@@ -19,6 +19,7 @@
         <span></span>
         <span></span>
     </button>
+
     <nav class="nav-wrapper">
         <?php
         // Affiche le menu principal défini dans l’administration WordPress
@@ -28,6 +29,7 @@
         ) );
         ?>
     </nav>
+    <?php get_template_part('templates_part/mobile-menu'); ?>
 </header>
 
 <?php get_template_part('templates_part/contact'); // Inclure la modale de contact ?>

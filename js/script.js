@@ -1,13 +1,20 @@
 /////////// Menu Burger ///////////
 document.addEventListener('DOMContentLoaded', () => {
     const burgerMenu = document.querySelector('.burger-menu');
-    const navMenu = document.querySelector('.header-menu');
+    const closeMenu = document.querySelector('.close-menu');
+    const mobileMenu = document.querySelector('#mobile-menu-container');
 
+    // Ouvrir le menu
     burgerMenu.addEventListener('click', () => {
-        burgerMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
+        mobileMenu.classList.add('active');
+    });
+
+    // Fermer le menu
+    closeMenu.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
     });
 });
+
 
 /////////// Gestion Modale Contact ///////////
 document.addEventListener("DOMContentLoaded", function() {
