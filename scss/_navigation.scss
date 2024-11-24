@@ -107,7 +107,7 @@ header, .mobile-header {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    z-index: 9999;
+    z-index: 1;
     transition: transform 0.3s ease-in-out;
 
     &.active {

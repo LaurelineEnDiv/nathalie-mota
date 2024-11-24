@@ -99,7 +99,7 @@ header, .mobile-header {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  z-index: 9999;
+  z-index: 1;
   transition: transform 0.3s ease-in-out;
 }
 #mobile-menu-container.active {
@@ -165,7 +165,7 @@ header, .mobile-header {
 }
 .modal-overlay.active {
   visibility: visible;
-  opacity: 1;
+  opacity: 2;
   transition: opacity 0.5s ease, linear 0s; /* Transition immédiate */
 }
 
@@ -180,9 +180,11 @@ header, .mobile-header {
   max-height: 80%; /* Limite la hauteur totale visible */
   background-color: white;
   border: solid 2px #000000;
-  z-index: 2;
+  z-index: 3;
   overflow-y: auto;
   transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
 }
 #contact-modal::before {
   content: "";
@@ -202,14 +204,36 @@ header, .mobile-header {
   justify-content: center;
   margin-top: 2em;
 }
+#contact-modal .contact-form label {
+  font-family: "Poppins", sans-serif;
+}
 #contact-modal .contact-form .wpcf7-form-control {
   width: 100%;
-  max-width: 400px;
+  max-width: 263px;
   box-sizing: border-box;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #B8BBC2;
+  border-radius: 8px;
+}
+#contact-modal .contact-form .wpcf7-form-control.wpcf7-submit {
+  padding: 1.2em 0;
+  background-color: #D8D8D8;
+  border: none;
+  border-radius: 2px;
+  font-family: "Space Mono";
+}
+@media (max-width: 768px) {
+  #contact-modal .contact-form {
+    padding: 1em;
+  }
+}
+@media (max-width: 768px) {
+  #contact-modal {
+    top: 20%;
+    width: 70%;
+    max-height: 70%;
+  }
 }
 
 .container.single-photo {
@@ -366,6 +390,7 @@ body {
   color: #000000;
   font-family: "Space Mono", monospace;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .container {
