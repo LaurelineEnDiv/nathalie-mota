@@ -1,22 +1,3 @@
-/////////// Menu Burger ///////////
-document.addEventListener('DOMContentLoaded', () => {
-    const burgerMenu = document.querySelector('.burger-menu');
-    const closeMenu = document.querySelector('.close-menu');
-    const mobileMenu = document.querySelector('#mobile-menu-container');
-
-    // Ouvrir le menu
-    burgerMenu.addEventListener('click', () => {
-        mobileMenu.classList.add('active');
-    });
-
-    // Fermer le menu
-    closeMenu.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-    });
-});
-
-
-/////////// Gestion Modale Contact ///////////
 document.addEventListener("DOMContentLoaded", function() {
     const contactLink = document.getElementById("contact-menu-link");
     const modal = document.getElementById("contact-modal");
@@ -57,27 +38,4 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.overflow = ''; // Réactive le défilement
     });  
 });
-
-
-/////////// Gestion navigation image miniature ///////////
-document.addEventListener('DOMContentLoaded', () => {
-    const currentThumbnail = document.getElementById('thumbnail-current-img');
-    const contentImage = document.querySelector('.photo img'); // Sélectionne l'image de the_content()
-
-    // Initialisation de la miniature 
-    if (contentImage) {
-        currentThumbnail.src = contentImage.src;
-    }
-
-    // Changement de l'image au survol
-    document.querySelectorAll('.photo-navigation a').forEach(link => {
-        link.addEventListener('mouseover', function () {
-            const thumbnailUrl = this.getAttribute('data-thumbnail');
-            if (thumbnailUrl) {
-                currentThumbnail.src = thumbnailUrl;
-            }
-        });
-    });
-});
-
 

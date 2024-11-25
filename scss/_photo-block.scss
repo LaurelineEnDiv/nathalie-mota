@@ -1,0 +1,34 @@
+
+.photo-block-container {
+    margin: 2.5em 0;
+
+    @media (max-width: $mobile) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .photo-block {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        margin-top: 2em;
+
+        @media (max-width: $mobile) {
+            flex-direction: column;
+            margin-top: 0;
+        }
+
+        .photo-item {
+            flex: 1 1 50%; 
+
+            img {
+                width: 100%;
+                height: 500px;
+                display: block;
+                object-fit: cover;
+            }
+        }
+    }
+}

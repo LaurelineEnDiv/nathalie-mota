@@ -102,48 +102,13 @@ if ( have_posts() ) :
         </div>
         <div class="separator"></div>
 
-    <div class="similar-photos">
+    <div class="photo-block-container">
         <p class="title">Vous aimerez aussi</p>
-        <div class="similar-photos-container">
-            <?php
-            // Vérifier les catégories associées à la photo actuelle
-            $current_categories = wp_get_post_terms(get_the_ID(), 'categorie', array('fields' => 'ids'));
-            
-            // Récupérer deux photos aléatoires dans les mêmes catégories
-                $args = array(
-                    'post_type' => 'photo',
-                    'posts_per_page' => 2, 
-                    'orderby' => 'rand', // Aléatoire
-                    'post__not_in' => array(get_the_ID()), // Exclure la photo actuelle
-                    'tax_query' => array(
-                        array(
-                            'taxonomy' => 'categorie',
-                            'field' => 'term_id',
-                            'terms' => $current_categories,
-                        ),
-                    ),
-                );
-
-                $similar_photos_query = new WP_Query($args);
-
-                // Si des photos sont trouvées
-                if ($similar_photos_query->have_posts()) :
-                    while ($similar_photos_query->have_posts()) : $similar_photos_query->the_post(); ?>
-                        <div class="similar-photo-item">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php 
-                                if (has_post_thumbnail()) {
-                                    the_post_thumbnail('large'); 
-                                } 
-                                ?>
-                            </a>
-                        </div>
-                    <?php endwhile; 
-                    wp_reset_postdata(); // Réinitialise les données
-                endif;
-            ?>
-        </div>
+        <?php
+        get_template_part('templates_part/photo_block');
+        ?>
     </div>
+
     </div>
     </div>
     <?php 

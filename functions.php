@@ -6,9 +6,11 @@ function theme_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
-//Charge le fichier Javascript
+//Charge les fichiers Javascript
 function theme_enqueue_scripts() {
-    wp_enqueue_script('script', get_template_directory_uri() . '/js/script.js', array('jquery'), null, true);
+    wp_enqueue_script('nav-photos', get_template_directory_uri() . '/js/nav-photos.js', array(), null, true);
+    wp_enqueue_script('menu-mobile', get_template_directory_uri() . '/js/menu-mobile.js', array(), null, true);
+    wp_enqueue_script('modale-contact', get_template_directory_uri() . '/js/modale-contact.js', array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 
