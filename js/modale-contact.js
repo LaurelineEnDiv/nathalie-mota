@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     const contactLink = document.getElementById("contact-menu-link");
+    const contactButton = document.querySelector(".contact-photo a"); 
     const modal = document.getElementById("contact-modal");
     const overlay = document.getElementById("modal-overlay");
-    const photoContactButton = document.querySelector(".contact-photo a"); 
     const photoReferenceField = document.getElementById("photo-reference-field"); // Champ caché
-    const ref = photoContactButton.getAttribute("data-ref");
+    const ref = contactButton.getAttribute("data-ref");
 
     // Réinitialiser le champ de référence photo
     const resetPhotoReferenceField = () => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Ouvrir la modale depuis une page photo 
-    photoContactButton.addEventListener("click", () => {
+    contactButton.addEventListener("click", () => {
         if (photoReferenceField) {
             photoReferenceField.value = ref; // Préremplir le champ avec la référence
         }

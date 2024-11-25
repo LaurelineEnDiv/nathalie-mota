@@ -4,12 +4,6 @@ $black: #000000;
 $mobile: 768px;
 $tablette: 1024px;
 
-@import 'navigation';
-@import 'modale-contact';
-@import 'single-photo';
-@import 'photo-block';
-
-
 /******* Style général *******/
 body {
     color: $black;
@@ -51,6 +45,12 @@ a {
             margin-left: calc(-50vw + 50%); /* Centre sur l'écran */
         }
 }
+
+@import 'home-page';
+@import 'navigation';
+@import 'modale-contact';
+@import 'single-photo';
+@import 'photo-block';
 
 
 

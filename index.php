@@ -1,16 +1,33 @@
 <?php get_header(); ?>
 
 <main>
-    <?php if ( have_posts() ) : ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <h2><?php the_title(); ?></h2>
-                <div><?php the_content(); ?></div>
-            </article>
-        <?php endwhile; ?>
-    <?php else : ?>
-        <p>Aucun contenu trouvé.</p>
+
+<?php
+    // Requête pour récupérer une photo aléatoire
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 1, // Une seule photo
+        'orderby' => 'rand', // Aléatoire
+    );
+
+    $random_photo_query = new WP_Query($args);
+
+    if ($random_photo_query->have_posts()) :
+        $random_photo_query->the_post(); // Charger la photo aléatoire
+        $background_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full'); // URL de l'image mise en avant
+    ?>
+        <div class="hero" style="background-image: url('<?php echo esc_url($background_image_url); ?>');">
+            <div class="hero-content">
+                <h1>Photographe Event</h1>
+            </div>
+        </div>
+    <?php 
+        wp_reset_postdata(); // Réinitialiser les données
+    ?>
+        
     <?php endif; ?>
+
+
 </main>
 
 <?php get_footer(); ?>
