@@ -6,42 +6,41 @@ if ( have_posts() ) :
     while ( have_posts() ) : 
         the_post(); 
 
-        // Récupération des champs personnalisés
-        $type = get_post_meta( get_the_ID(), 'type', true );  
-        $ref = get_post_meta( get_the_ID(), 'ref', true );
-        // Récupération des taxonomies
-        $formats = get_the_terms( get_the_ID(), 'format' );  
-        $categories = get_the_terms( get_the_ID(), 'categorie' );  
-        // Récupération année (date de publication)
-        $annee = get_the_date('Y');
-        ?>
-        <div class="container single-photo">
-            <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <div class="photo-infos">
-                    <h1><?php the_title(); ?></h1>
-                    <div class="photo-meta">
-                        <p class="title">Référence : <?php echo $ref; ?></p>
-                        <p class="title">Catégorie : <?php
-                            foreach ($categories as $categorie) {
-                                echo $categorie->name . ' '; // Affiche le nom du terme
-                            } ?>
-                        </p> 
-                        <p class="title">Format : <?php
-                            foreach ($formats as $format) {
-                                echo $format->name . ' '; 
-                            } ?>
-                        </p>
-                        <p class="title">Type : <?php echo $type; ?></p> 
-                        <p class="title">Année : <?php echo $annee; ?></p>
-                    </div>
-                    <div class="separator margin"></div>
+    // Récupération des champs personnalisés
+    $type = get_post_meta( get_the_ID(), 'type', true );  
+    $ref = get_post_meta( get_the_ID(), 'ref', true );
+    // Récupération des taxonomies
+    $formats = get_the_terms( get_the_ID(), 'format' );  
+    $categories = get_the_terms( get_the_ID(), 'categorie' );  
+    // Récupération année (date de publication)
+    $annee = get_the_date('Y');
+?>
+    <div class="container single-photo">
+        <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div class="photo-infos">
+                <h1><?php the_title(); ?></h1>
+                <div class="photo-meta">
+                    <p class="title">Référence : <?php echo $ref; ?></p>
+                    <p class="title">Catégorie : <?php
+                        foreach ($categories as $categorie) {
+                            echo $categorie->name . ' '; // Affiche le nom du terme
+                        } ?>
+                    </p> 
+                    <p class="title">Format : <?php
+                        foreach ($formats as $format) {
+                            echo $format->name . ' '; 
+                        } ?>
+                    </p>
+                    <p class="title">Type : <?php echo $type; ?></p> 
+                    <p class="title">Année : <?php echo $annee; ?></p>
                 </div>
+                <div class="separator margin"></div>
+            </div>
             <div class="photo">
                 <?php the_content(); ?>
             </div>
-            </figure>
+        </figure>
         
-
         <div class="interaction-photo">
             <div class="contact-photo">
                 <p>Cette photo vous intéresse ?</p>
@@ -102,14 +101,29 @@ if ( have_posts() ) :
         </div>
         <div class="separator"></div>
 
-    <div class="photo-block-container">
+    <div class="similar-photos">
         <p class="title">Vous aimerez aussi</p>
+        <div class="photo-block-container">
         <?php
-        get_template_part('templates_part/photo_block');
+            $current_categories = wp_get_post_terms(get_the_ID(), 'categorie', array('fields' => 'ids'));
+
+            get_template_part('template_parts/photo_block', null, array(
+                'post_type' => 'photo',
+                'posts_per_page' => 2,
+                'orderby' => 'rand',
+                'post__not_in' => array(get_the_ID()),
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field' => 'term_id',
+                        'terms' => $current_categories,
+                    ),
+                ),
+            ));
         ?>
+        </div>
     </div>
 
-    </div>
     </div>
     <?php 
     endwhile;

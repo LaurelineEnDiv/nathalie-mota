@@ -29,8 +29,8 @@
         ) );
         ?>
     </nav>
-    <?php get_template_part('templates_part/mobile-menu'); ?>
+    <?php get_template_part('template_parts/mobile-menu'); ?>
 </header>
 
-<?php get_template_part('templates_part/contact'); // Inclure la modale de contact ?>
+<?php get_template_part('template_parts/contact'); // Inclure la modale de contact ?>
 

@@ -4,6 +4,12 @@ $black: #000000;
 $mobile: 768px;
 $tablette: 1024px;
 
+@import 'home-page';
+@import 'navigation';
+@import 'modale-contact';
+@import 'single-photo';
+@import 'photo-block';
+
 /******* Style général *******/
 body {
     color: $black;
@@ -14,10 +20,7 @@ body {
 
 .container {
     margin : 0 4em;
-
-    @media (max-width: $mobile) {
-        margin: 0 6em;
-    }
+    box-sizing: border-box;
 }
 
 h1, .title {
@@ -41,16 +44,12 @@ a {
 
         @media (max-width: $mobile) {
             margin-top: 2em;
-            width: 100vw; 
-            margin-left: calc(-50vw + 50%); /* Centre sur l'écran */
+            width: 100%;
+            margin: 0 auto;
         }
 }
 
-@import 'home-page';
-@import 'navigation';
-@import 'modale-contact';
-@import 'single-photo';
-@import 'photo-block';
+
 
 
 

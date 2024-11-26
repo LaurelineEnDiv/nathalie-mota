@@ -1,31 +1,21 @@
 
 .photo-block-container {
-    margin: 2.5em 0;
+    margin: 2em 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
 
     @media (max-width: $mobile) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
+        grid-template-columns: 1fr;
     }
 
     .photo-block {
-        display: flex;
-        gap: 20px;
-        justify-content: space-between;
-        margin-top: 2em;
-
-        @media (max-width: $mobile) {
-            flex-direction: column;
-            margin-top: 0;
-        }
+        display: contents; /* Utilisé pour éviter de perturber la grille parent */
 
         .photo-item {
-            flex: 1 1 50%; 
-
             img {
                 width: 100%;
-                height: 500px;
+                height: 495px; 
                 display: block;
                 object-fit: cover;
             }

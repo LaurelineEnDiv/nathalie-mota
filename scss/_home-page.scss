@@ -2,28 +2,32 @@
     width: 100%;
     height: 962px; 
     background-size: cover; 
-    background-position: center; 
-    display: flex;
+    background-position: center;
+    display:flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    text-align: center;
-    position: relative;
+
+    @media (max-width: $mobile) { 
+        height: 250px; 
+    }
 }
 
 .hero-content {
-    z-index: 2;
-    max-width: 800px;
-    padding: 20px;
+    max-width: 1000px;
+    padding: 3em;
+    
+        h1 {
+            color: transparent;
+            -webkit-text-stroke: 3px white; /* Bordure blanche */
+            font-size: 96px;
+            font-style: italic;
+            text-align: center; 
+
+            @media (max-width: $mobile) { 
+                font-size: 28px;
+                -webkit-text-stroke: 0.86px white; /* Bordure blanche */
+            }
+        }
 }
 
-.hero:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Superposition pour rendre le texte lisible */
-    z-index: 1;
-}
+
