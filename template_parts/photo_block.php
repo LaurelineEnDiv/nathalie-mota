@@ -1,16 +1,13 @@
 <?php
-// Par défaut, aucun argument n'est passé
+
 if (!isset($args)) {
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 6, // Affiche 6 photos par défaut
-        'orderby' => 'rand',  // Par défaut, tri aléatoire
+        'posts_per_page' => 8,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => 1, // Page par défaut
     );
-}
-
-// Pour exclure la photo actuelle dans `single-photo`
-if (is_singular('photo')) {
-    $args['post__not_in'] = array(get_the_ID());
 }
 
 // Requête WP_Query avec les arguments 

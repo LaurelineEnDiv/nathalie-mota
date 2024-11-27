@@ -32,11 +32,16 @@
     <?php
     get_template_part('template_parts/photo_block', null, array(
         'post_type' => 'photo',
-        'posts_per_page' => -1, // Toutes les photos
+        'posts_per_page' => 8, 
         'orderby' => 'date',    // Tri par date
         'order' => 'DESC',      // Plus récentes d'abord
+        'paged' => 1,          // Charge la première page
     ));
     ?>
+    </div>
+    <div class="load-more-container">
+        <button id="load-more-photos" data-paged="1">Charger plus</button>
+        <div id="loading" style="display: none;">Chargement...</div>
     </div>
 </div>
 

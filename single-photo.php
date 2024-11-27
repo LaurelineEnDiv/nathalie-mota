@@ -107,6 +107,11 @@ if ( have_posts() ) :
         <?php
             $current_categories = wp_get_post_terms(get_the_ID(), 'categorie', array('fields' => 'ids'));
 
+            // Pour exclure la photo actuelle dans `single-photo`
+            if (is_singular('photo')) {
+            $args['post__not_in'] = array(get_the_ID());
+            }    
+
             get_template_part('template_parts/photo_block', null, array(
                 'post_type' => 'photo',
                 'posts_per_page' => 2,
