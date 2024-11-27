@@ -100,8 +100,9 @@ function load_more_photos() {
 
     $query = new WP_Query($args);
 
-    if ($query->have_posts()) :
-        while ($query->have_posts()) : $query->the_post(); ?>
+    if ($query->have_posts()) : ?>
+        <div class="photo-block">
+            <?php while ($query->have_posts()) : $query->the_post(); ?>
             <div class="photo-item">
                 <a href="<?php the_permalink(); ?>">
                     <?php
@@ -113,12 +114,14 @@ function load_more_photos() {
                     ?>
                 </a>
             </div>
-        <?php endwhile;
+            <?php endwhile; ?>
+        </div>
+     <?php
         wp_reset_postdata();
     else :
         echo '<p>Aucune autre photo disponible.</p>';
     endif;
-
+    
     wp_die(); // Arrête l'exécution après avoir retourné les résultats
 }
 add_action('wp_ajax_load_more_photos', 'load_more_photos');

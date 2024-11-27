@@ -1,5 +1,7 @@
 jQuery(document).ready(function ($) {
-    $('#load-more-photos').on('click', function () {
+    $('#load-more-photos').on('click', function (event) {
+        event.preventDefault(); // Empêche le comportement par défaut (revenir en haut)
+
         let button = $(this);
         let paged = parseInt(button.data('paged')) + 1; // Page suivante
 

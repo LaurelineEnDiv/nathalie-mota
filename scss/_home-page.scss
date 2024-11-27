@@ -46,6 +46,18 @@
     }
 }
 
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+
+    #load-more-photos {
+        background-color: #D8D8D8;
+        padding: 1em 6em;
+        border-radius: 2px;
+    }
+}
+
 
 
 
