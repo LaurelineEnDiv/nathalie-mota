@@ -10,7 +10,7 @@
 }
 @media (max-width: 768px) {
   .hero {
-    height: 250px;
+    height: 253px;
   }
 }
 
@@ -30,6 +30,21 @@
     font-size: 28px;
     -webkit-text-stroke: 0.86px white; /* Bordure blanche */
   }
+}
+
+#photo-filters {
+  display: flex;
+  gap: 20px;
+  margin: 2em 0;
+}
+#photo-filters select {
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 1em 4em 1em 1em;
+  border: solid 1.3px #B8BBC2;
+  border-radius: 8px;
 }
 
 header, .mobile-header {
@@ -413,6 +428,11 @@ header, .mobile-header {
   display: block;
   -o-object-fit: cover;
      object-fit: cover;
+}
+@media (max-width: 768px) {
+  .photo-block-container .photo-block .photo-item img {
+    height: 278px;
+  }
 }
 
 /******* Style général *******/

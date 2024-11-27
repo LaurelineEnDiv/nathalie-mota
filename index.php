@@ -27,7 +27,7 @@
     <?php endif; ?>
 
 <div class="container">
-    <p>Filtres</p>
+    <?php get_template_part('template_parts/photo_filters'); ?>     
     <div class="photo-block-container">
     <?php
     get_template_part('template_parts/photo_block', null, array(
@@ -39,6 +39,7 @@
     ?>
     </div>
 </div>
+
 </main>
 
 <?php get_footer(); ?>

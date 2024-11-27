@@ -8,7 +8,7 @@
     align-items: center;
 
     @media (max-width: $mobile) { 
-        height: 250px; 
+        height: 253px; 
     }
 }
 
@@ -29,5 +29,27 @@
             }
         }
 }
+
+#photo-filters {
+    display: flex;
+    gap: 20px;
+    margin: 2em 0;
+
+    select {
+        background-color: white;
+        font-family: "Poppins", sans-serif; 
+        font-size: 12px;
+        text-transform: uppercase;
+        padding: 1em 4em 1em 1em;   
+        border: solid 1.3px #B8BBC2;
+        border-radius: 8px;
+    }
+}
+
+
+
+
+
+
 
 

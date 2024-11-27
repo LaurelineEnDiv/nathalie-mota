@@ -8,7 +8,7 @@ if (!isset($args)) {
     );
 }
 
-// Si vous voulez exclure la photo actuelle (utile dans `single-photo`), vous pouvez le gérer dans $args
+// Pour exclure la photo actuelle dans `single-photo`
 if (is_singular('photo')) {
     $args['post__not_in'] = array(get_the_ID());
 }
