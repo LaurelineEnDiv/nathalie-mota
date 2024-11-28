@@ -11,6 +11,11 @@ header, .mobile-header {
 .site-logo img {
     width: 216px;
     max-height: 60px;
+
+    @media (max-width: $mobile) {
+        width: 138px; 
+        height: 9px;
+    }
 }
 
 //////// Nav Header + Footer ////////

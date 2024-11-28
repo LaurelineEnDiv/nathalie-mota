@@ -35,14 +35,15 @@ function theme_register_menus() {
 }
 add_action( 'init', 'theme_register_menus' );
 
-// si le titre du menu est "Contact", ajoute un identifiant contact-menu-link au lien pour activer la modale.
-function add_contact_menu_id($atts, $item, $args) {
+// Attribue la class "open-modale" au lien Contact du menu
+function add_contact_menu_class($atts, $item, $args) {
     if ($item->title == 'Contact') { // Titre du lien dans le menu WordPress
-        $atts['id'] = 'contact-menu-link';
-    }
+            $atts['class'] = 'open-modale'; // Ajoute la classe 
+        }
     return $atts;
 }
-add_filter('nav_menu_link_attributes', 'add_contact_menu_id', 10, 3);
+add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
+
 
 
 // Traiter la requête AJAX des filtres

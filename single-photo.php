@@ -44,7 +44,7 @@ if ( have_posts() ) :
         <div class="interaction-photo">
             <div class="contact-photo">
                 <p>Cette photo vous intéresse ?</p>
-                <a href="#" id="contact-photo-btn" data-ref="<?php echo esc_attr($ref); ?>">Contact</a>
+                <a href="#" id="contact-photo-btn" class="open-modale" data-ref="<?php echo esc_attr($ref); ?>">Contact</a>
             </div>
             <div class="nav-photos">
             <div class="thumbnail-container">
