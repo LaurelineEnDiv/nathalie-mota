@@ -1,5 +1,25 @@
-.container.single-photo {
-    position: relative; 
+.single-photo {
+    position: relative;
+    
+    .separator {
+        border: solid 0.5px $black;
+        margin : 0 4em;
+        
+            &.half {
+                width: 42%;
+                margin-left: 4em;
+    
+                @media (max-width: $mobile) {
+                    width: 100%;
+                    margin-left: 0;
+                }
+            }
+    
+            @media (max-width: $mobile) {
+                width: 100%;
+                margin: 0;
+            }
+    }
 
     &::before {
         content: "";

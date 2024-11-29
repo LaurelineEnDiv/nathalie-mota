@@ -1,6 +1,7 @@
-<?php
+<?php get_header(); ?>
 
-get_header(); 
+<main>
+    <?php
 
 if ( have_posts() ) : 
     while ( have_posts() ) : 
@@ -15,8 +16,8 @@ if ( have_posts() ) :
     // Récupération année (date de publication)
     $annee = get_the_date('Y');
 ?>
-    <div class="container single-photo">
-        <figure id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <div class="single-photo">
+        <figure id="post-<?php the_ID(); ?>" class="container"<?php post_class(); ?>>
             <div class="photo-infos">
                 <h1><?php the_title(); ?></h1>
                 <div class="photo-meta">
@@ -34,14 +35,18 @@ if ( have_posts() ) :
                     <p class="title">Type : <?php echo $type; ?></p> 
                     <p class="title">Année : <?php echo $annee; ?></p>
                 </div>
-                <div class="separator margin"></div>
             </div>
+
             <div class="photo">
                 <?php the_content(); ?>
             </div>
         </figure>
+
+        <div>
+            <div class="separator half"></div>
+        </div>
         
-        <div class="interaction-photo">
+        <div class="interaction-photo container">
             <div class="contact-photo">
                 <p>Cette photo vous intéresse ?</p>
                 <a href="#" id="contact-photo-btn" class="open-modale" data-ref="<?php echo esc_attr($ref); ?>">Contact</a>
@@ -99,9 +104,13 @@ if ( have_posts() ) :
             </div>
 
         </div>
-        <div class="separator"></div>
+    
 
-    <div class="similar-photos">
+    <div>
+        <div class="separator"></div>
+    </div>
+
+    <div class="similar-photos container">
         <p class="title">Vous aimerez aussi</p>
         <div class="photo-block-container">
         <?php
@@ -133,7 +142,8 @@ if ( have_posts() ) :
     <?php 
     endwhile;
     endif;
+    ?>
+</main>
 
-get_footer(); 
-?>
+<?php get_footer(); ?>
 

@@ -1,5 +1,4 @@
-<footer>
-    <div class="separator"></div>
+<footer>  
     <nav class="footer-menu">
             <?php
             wp_nav_menu( array(
