@@ -51,15 +51,19 @@ function filter_photos_ajax() {
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
     $tax_query = [];
+    $orderby = 'date'; 
+    $order = 'DESC';  
 
     // Construire la tax_query à partir des filtres
     if (!empty($filters)) {
         foreach ($filters as $taxonomy => $terms) {
-            if (!empty($terms)) {
+            if ($taxonomy === 'orderby' && !empty($terms)) {
+                $order = sanitize_text_field($terms[0]);
+            } elseif (!empty($terms)) {
                 $tax_query[] = array(
-                    'taxonomy' => $taxonomy,
+                    'taxonomy' => sanitize_text_field($taxonomy),
                     'field' => 'term_id',
-                    'terms' => $terms,
+                    'terms' => array_map('intval', $terms),
                     'operator' => 'IN',
                 );
             }
@@ -70,7 +74,9 @@ function filter_photos_ajax() {
         'post_type' => 'photo',
         'posts_per_page' => 8,
         'paged' => $paged,
-        'tax_query' => (!empty($tax_query) ? $tax_query : array()), // S'assurer que tax_query est un tableau
+        'tax_query' => !empty($tax_query) ? $tax_query : null,
+        'orderby' => $orderby,
+        'order' => $order,
     );
 
     $query = new WP_Query($args);

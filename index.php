@@ -33,36 +33,47 @@ get_header(); ?>
     <?php endif; ?>
 
 <div class="container">
-<div class="filters-container">
-    <div class="filter-group" data-taxonomy="categorie">
-        <span class="filter-title">Catégories</span>
-        <div class="filter-options">
-            <?php
-            $categories = get_terms(array(
-                'taxonomy' => 'categorie',
-                'hide_empty' => true,
-            ));
-            foreach ($categories as $category) {
-                echo '<div class="filter-option" data-term-id="' . esc_attr($category->term_id) . '">' . esc_html($category->name) . '</div>';
-            }
-            ?>
+    <div class="filters-container">
+        <div class="taxonomies">
+            <div class="filter-group" data-taxonomy="categorie">
+                <span class="filter-title">Catégories</span>
+                <div class="filter-options">
+                    <?php
+                    $categories = get_terms(array(
+                        'taxonomy' => 'categorie',
+                        'hide_empty' => true,
+                    ));
+                    foreach ($categories as $category) {
+                        echo '<div class="filter-option" data-term-id="' . esc_attr($category->term_id) . '">' . esc_html($category->name) . '</div>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="filter-group" data-taxonomy="format">
+                <span class="filter-title">Formats</span>
+                <div class="filter-options">
+                    <?php
+                    $formats = get_terms(array(
+                        'taxonomy' => 'format',
+                        'hide_empty' => true,
+                    ));
+                    foreach ($formats as $format) {
+                        echo '<div class="filter-option" data-term-id="' . esc_attr($format->term_id) . '">' . esc_html($format->name) . '</div>';
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="dates">
+            <div class="filter-group" data-taxonomy="orderby">
+                <span class="filter-title">Trier par</span>
+                <div class="filter-options">
+                    <div class="filter-option" data-term-id="DESC">Plus récentes</div>
+                    <div class="filter-option" data-term-id="ASC">Plus anciennes</div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="filter-group" data-taxonomy="format">
-        <span class="filter-title">Formats</span>
-        <div class="filter-options">
-            <?php
-            $formats = get_terms(array(
-                'taxonomy' => 'format',
-                'hide_empty' => true,
-            ));
-            foreach ($formats as $format) {
-                echo '<div class="filter-option" data-term-id="' . esc_attr($format->term_id) . '">' . esc_html($format->name) . '</div>';
-            }
-            ?>
-        </div>
-    </div>
-</div>
 
     <div class="photo-block-container">
     <?php

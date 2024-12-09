@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const filterOptions = document.querySelectorAll('.filter-option');
     const loadMoreButton = document.querySelector('#load-more-photos');
-    const photoContainer = document.querySelector('.photo-block-container');
-
+    const sortOptions = document.querySelectorAll('[data-taxonomy="orderby"] .filter-option');
     let selectedFilters = {};
 
     // Gérer les clics sur les filtres
@@ -53,14 +52,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         photoContainer.innerHTML += data.data.html; // Ajoute les nouvelles photos
                     }
                     loadMoreButton.setAttribute('data-paged', page);
-                } else {
-                    console.error('Erreur lors du chargement des photos.');
                 }
             })
-            .catch(error => console.error('Erreur AJAX :', error))
             .finally(() => {
                 document.getElementById('loading').style.display = 'none'; // Cacher le spinner
             });
     }
+
+    // Trier par date
+    sortOptions.forEach(option => {
+        option.addEventListener('click', function () {
+            const termId = this.getAttribute('data-term-id');
+    
+            // Mettre à jour le tri
+            selectedFilters['orderby'] = [termId];
+    
+            // Marquer comme actif
+            sortOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+    
+            // Rafraîchir les photos
+            fetchPhotos(1);
+        });
+    });
     
 });
