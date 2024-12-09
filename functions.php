@@ -11,12 +11,11 @@ function theme_enqueue_scripts() {
     wp_enqueue_script('nav-photos', get_template_directory_uri() . '/js/nav-photos.js', array(), null, true);
     wp_enqueue_script('menu-mobile', get_template_directory_uri() . '/js/menu-mobile.js', array(), null, true);
     wp_enqueue_script('modale-contact', get_template_directory_uri() . '/js/modale-contact.js', array(), null, true);
-    wp_enqueue_script('filters', get_template_directory_uri() . '/js/filters.js', array('jquery'), null, true);
-        // Ajouter la variable ajaxurl pour que JavaScript communique avec WordPress via AJAX
-        wp_localize_script('filters', 'myAjax', array(
-    'ajaxurl' => admin_url('admin-ajax.php'), // URL de l'admin-ajax
-    'nonce' => wp_create_nonce('load_more_nonce') // Créer un nonce pour la sécurité
-));
+    wp_enqueue_script('filters-script', get_template_directory_uri() . '/js/filters.js', array('jquery'), null, true);
+        // Localiser l'URL AJAX
+        $ajaxurl = admin_url('admin-ajax.php');
+        $inline_script = "var ajaxurl = '" . esc_js($ajaxurl) . "';";
+        wp_add_inline_script('filters-script', $inline_script, 'before');
 
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
@@ -43,121 +42,46 @@ function add_contact_menu_class($atts, $item, $args) {
 add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 
 
-
-// Traiter la requête AJAX des filtres
-function filter_photos_ajax() {
-    // Vérifier si les filtres sont définis
-    $filters = isset($_POST['filters']) ? json_decode(stripslashes($_POST['filters']), true) : [];
+//Gérer les requêtes Ajax pour traiter les filtres et retourner les photos filtrées 
+function fetch_photos() {
+    // Vérifier et récupérer les filtres
+    $filters = isset($_POST['filters']) ? $_POST['filters'] : array();
+    $order = isset($_POST['order']) ? sanitize_text_field($_POST['order']) : 'DESC';
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
-    $tax_query = [];
-    $orderby = 'date'; 
-    $order = 'DESC';  
-
-    // Construire la tax_query à partir des filtres
-    if (!empty($filters)) {
-        foreach ($filters as $taxonomy => $terms) {
-            if ($taxonomy === 'orderby' && !empty($terms)) {
-                $order = sanitize_text_field($terms[0]);
-            } elseif (!empty($terms)) {
-                $tax_query[] = array(
-                    'taxonomy' => sanitize_text_field($taxonomy),
-                    'field' => 'term_id',
-                    'terms' => array_map('intval', $terms),
-                    'operator' => 'IN',
-                );
-            }
-        }
-    }
-
+    // Construire les arguments WP_Query
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
-        'paged' => $paged,
-        'tax_query' => !empty($tax_query) ? $tax_query : null,
-        'orderby' => $orderby,
+        'orderby' => 'date',
         'order' => $order,
+        'paged' => $paged,
     );
 
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) {
-        ob_start(); // Capture le contenu HTML généré
-        while ($query->have_posts()) {
-            $query->the_post();
-            ?>
-            <div class="photo-block">
-            <div class="photo-item">
-                <a href="<?php the_permalink(); ?>">
-                    <?php 
-                    if (has_post_thumbnail()) {
-                        the_post_thumbnail('large'); 
-                    } else {
-                        echo '<p>Aucune image disponible</p>';
-                    }
-                    ?>
-                </a>
-            </div>
-            </div>
-            <?php
-        }
-        $output = ob_get_clean();
-        wp_send_json_success(array('html' => $output)); // Envoyer la réponse AJAX avec le HTML
-    } else {
-        wp_send_json_success(array('html' => '<p>Aucune photo trouvée.</p>')); // Si aucun post trouvé
+    // Ajouter les taxonomies aux arguments si définies
+    foreach ($filters as $taxonomy => $term_id) {
+        $args['tax_query'][] = array(
+            'taxonomy' => sanitize_key($taxonomy),
+            'field' => 'term_id',
+            'terms' => intval($term_id),
+        );
     }
 
-    wp_die(); // Terminer le script
+    // WP_Query pour récupérer les photos
+    ob_start();
+    get_template_part('template_parts/photo_block', null, $args);
+    $html = ob_get_clean();
+
+    if (!empty($html)) {
+        wp_send_json_success(array('html' => $html));
+    } else {
+        wp_send_json_error();
+    }
+
+    wp_die();
 }
-
-add_action('wp_ajax_filter_photos', 'filter_photos_ajax');
-add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_ajax');
-
-
-
-// Traiter la requête AJAX du chargement infini
-function load_more_photos() {
-    // Vérifier le nonce pour la sécurité
-    check_ajax_referer('load_more_nonce', 'nonce');
-
-    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-
-    $args = array(
-        'post_type' => 'photo',
-        'posts_per_page' => 8, 
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'paged' => $paged,
-    );
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) : ?>
-        <div class="photo-block">
-            <?php while ($query->have_posts()) : $query->the_post(); ?>
-            <div class="photo-item">
-                <a href="<?php the_permalink(); ?>">
-                    <?php
-                    if (has_post_thumbnail()) {
-                        the_post_thumbnail('large');
-                    } else {
-                        echo '<p>Aucune image disponible</p>';
-                    }
-                    ?>
-                </a>
-            </div>
-            <?php endwhile; ?>
-        </div>
-     <?php
-        wp_reset_postdata();
-    else :
-        echo '<p>Aucune autre photo disponible.</p>';
-    endif;
-    
-    wp_die(); // Arrête l'exécution après avoir retourné les résultats
-}
-add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_fetch_photos', 'fetch_photos');
+add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');
 
 ?>
 

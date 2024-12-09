@@ -32,7 +32,5 @@ if ($query->have_posts()) : ?>
     </div>
 <?php
     wp_reset_postdata();
-else :
-    echo '<p>Aucune photo trouvée.</p>';
 endif;
 ?>
