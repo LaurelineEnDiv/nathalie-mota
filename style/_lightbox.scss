@@ -11,6 +11,11 @@
     z-index: 9999;
 }
 
+.lightbox.active {
+    display: flex; 
+}
+
+
 .lightbox img {
     max-width: 90%;
     max-height: 90%;

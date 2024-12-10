@@ -29,7 +29,10 @@ if ($query->have_posts()) : ?>
                 </a>
                 <div class="photo-overlay">
                     <span class="lightbox-icon" data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>">
-                        <i class="fas fa-expand"></i> <!-- Picto plein écran -->
+                        <i class="fas fa-expand"></i> 
+                    </span>
+                    <span class="hover-icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/icon_eye.png">
                     </span>
                 </div>
             </div>

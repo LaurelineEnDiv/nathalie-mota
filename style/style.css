@@ -556,18 +556,38 @@ footer .footer-menu {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: flex-end;
-  align-items: flex-start;
+  /* Initialement masqué avec opacity et visibility */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  /* Empêche l'overlay d'intercepter les clics sauf sur les éléments enfants */
+  pointer-events: none;
+  z-index: 1;
 }
-.photo-block-container .photo-block .photo-item .lightbox-icon {
-  padding: 10px;
+.photo-block-container .photo-block .photo-item .photo-overlay .lightbox-icon {
+  position: absolute;
+  top: 11px;
+  right: 15px;
   color: white;
   cursor: pointer;
   font-size: 20px;
+  z-index: 2;
+  /* Permet à l'icône d'être cliquée */
+  pointer-events: auto;
+}
+.photo-block-container .photo-block .photo-item .photo-overlay .hover-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+}
+.photo-block-container .photo-block .photo-item .photo-overlay .hover-icon img {
+  width: 48px;
+  height: 32px;
 }
 .photo-block-container .photo-block .photo-item:hover .photo-overlay {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 .lightbox {
@@ -581,6 +601,10 @@ footer .footer-menu {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+.lightbox.active {
+  display: flex;
 }
 
 .lightbox img {

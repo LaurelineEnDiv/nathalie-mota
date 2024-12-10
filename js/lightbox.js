@@ -11,12 +11,12 @@ jQuery(document).ready(function ($) {
         }).get();
 
         $(".lightbox img").attr("src", imageUrl);
-        $(".lightbox").fadeIn();
+        $(".lightbox").addClass("active"); // Ajout de la classe active
     });
 
     // Fermer la lightbox
     $("body").on("click", ".lightbox .close", function () {
-        $(".lightbox").fadeOut();
+        $(".lightbox").removeClass("active"); // Suppression de la classe active
     });
 
     // Afficher l'image suivante
@@ -34,7 +34,7 @@ jQuery(document).ready(function ($) {
     // Fermer la lightbox en cliquant à l'extérieur de l'image
     $(".lightbox").on("click", function (e) {
         if ($(e.target).is(".lightbox")) {
-            $(".lightbox").fadeOut();
+            $(".lightbox").removeClass("active"); // Suppression de la classe active
         }
     });
 });
