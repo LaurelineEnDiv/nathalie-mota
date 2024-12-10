@@ -13,6 +13,9 @@
         display: contents; /* Utilisé pour éviter de perturber la grille parent */
 
         .photo-item {
+            position: relative;
+            display: inline-block;
+
             img {
                 width: 100%;
                 height: 495px; 
@@ -23,6 +26,30 @@
                     height: 278px; 
                 }
             }
+
+            .photo-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: flex-end;
+                align-items: flex-start;
+            }
+            
+            .lightbox-icon {
+                padding: 10px;
+                color: white;
+                cursor: pointer;
+                font-size: 20px;
+            }
+        }
+
+        .photo-item:hover .photo-overlay {
+            display: flex;
         }
     }
 }
+

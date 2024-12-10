@@ -27,6 +27,11 @@ if ($query->have_posts()) : ?>
                     }
                     ?>
                 </a>
+                <div class="photo-overlay">
+                    <span class="lightbox-icon" data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>">
+                        <i class="fas fa-expand"></i> <!-- Picto plein écran -->
+                    </span>
+                </div>
             </div>
         <?php endwhile; ?>
     </div>
