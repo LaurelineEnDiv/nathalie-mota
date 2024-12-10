@@ -531,7 +531,7 @@ footer .footer-menu {
   }
 }
 .photo-block-container .photo-block {
-  display: contents; /* Utilisé pour éviter de perturber la grille parent */
+  display: contents; /* pour éviter de perturber la grille parent */
 }
 .photo-block-container .photo-block .photo-item {
   position: relative;
@@ -556,6 +556,8 @@ footer .footer-menu {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-transform: uppercase;
   /* Initialement masqué avec opacity et visibility */
   opacity: 0;
   visibility: hidden;
@@ -568,22 +570,39 @@ footer .footer-menu {
   position: absolute;
   top: 11px;
   right: 15px;
-  color: white;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   z-index: 2;
-  /* Permet à l'icône d'être cliquée */
-  pointer-events: auto;
+  pointer-events: auto; /* Permet à l'icône d'être cliquée */
+  background-color: black;
+  width: 40px; /* Taille du cercle */
+  height: 40px;
+  border-radius: 50%; /* Rend la forme circulaire */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.photo-block-container .photo-block .photo-item .photo-overlay .hover-icon {
+.photo-block-container .photo-block .photo-item .photo-overlay .eye-icon {
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: 2;
 }
-.photo-block-container .photo-block .photo-item .photo-overlay .hover-icon img {
+.photo-block-container .photo-block .photo-item .photo-overlay .eye-icon img {
   width: 48px;
   height: 32px;
+}
+.photo-block-container .photo-block .photo-item .photo-overlay .photo-category, .photo-block-container .photo-block .photo-item .photo-overlay .photo-reference {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  z-index: 2;
+}
+.photo-block-container .photo-block .photo-item .photo-overlay .photo-reference {
+  left: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 }
 .photo-block-container .photo-block .photo-item:hover .photo-overlay {
   opacity: 1;
@@ -596,8 +615,9 @@ footer .footer-menu {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -612,6 +632,23 @@ footer .footer-menu {
   max-height: 90%;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.lightbox-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  color: white;
+  font-size: 14px;
+}
+
+.lightbox-ref {
+  font-weight: bold;
+}
+
+.lightbox-category {
+  font-style: italic;
+  margin-top: 5px;
 }
 
 .lightbox .close,

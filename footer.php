@@ -1,10 +1,16 @@
 <footer>
+
     <div class="lightbox">
         <img src="">
+        <div class="lightbox-meta">
+            <div class="lightbox-ref"></div>
+            <div class="lightbox-category"></div>
+        </div>
         <span class="close">&times;</span>
         <span class="prev">&#10094;</span>
         <span class="next">&#10095;</span>
     </div>
+
     <nav class="footer-menu">
             <?php
             wp_nav_menu( array(

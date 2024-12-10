@@ -28,12 +28,31 @@ if ($query->have_posts()) : ?>
                     ?>
                 </a>
                 <div class="photo-overlay">
-                    <span class="lightbox-icon" data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>">
+                    <span class="lightbox-icon" 
+                    data-image="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>"
+                    data-ref="<?php echo esc_attr(get_post_meta(get_the_ID(), 'ref', true)); ?>"
+                    data-category="<?php 
+                        $categories = get_the_terms(get_the_ID(), 'categorie');
+                        if (!empty($categories) && !is_wp_error($categories)) {
+                            echo esc_html($categories[0]->name); // Affiche la première catégorie
+                        }
+                    ?>">
                         <i class="fas fa-expand"></i> 
                     </span>
-                    <span class="hover-icon">
+                    <span class="eye-icon">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/icon_eye.png">
                     </span>
+                    <div class="photo-reference">
+                        <?php echo esc_html(get_post_meta(get_the_ID(), 'ref', true)); ?>
+                    </div>
+                    <div class="photo-category">
+                        <?php 
+                        $categories = get_the_terms(get_the_ID(), 'categorie'); 
+                        if (!empty($categories) && !is_wp_error($categories)) {
+                            echo esc_html($categories[0]->name);
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         <?php endwhile; ?>
