@@ -89,7 +89,6 @@ get_header(); ?>
 
     <div class="load-more-container">
         <a href="#" id="load-more-photos" data-paged="1">Charger plus</a>
-        <div id="loading" style="display: none;">Chargement...</div>
     </div>
 </div>
 

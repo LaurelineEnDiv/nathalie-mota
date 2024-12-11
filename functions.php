@@ -44,14 +44,14 @@ function add_contact_menu_class($atts, $item, $args) {
 add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 
 
-//Gérer les requêtes Ajax pour traiter les filtres et retourner les photos filtrées 
+//Gérer les requêtes Ajax pour filtrer les photos
 function fetch_photos() {
     // Vérifier et récupérer les filtres
     $filters = isset($_POST['filters']) ? $_POST['filters'] : array();
     $order = isset($_POST['order']) ? sanitize_text_field($_POST['order']) : 'DESC';
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
-    // Construire les arguments WP_Query
+    // Arguments WP_Query
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
@@ -60,7 +60,7 @@ function fetch_photos() {
         'paged' => $paged,
     );
 
-    // Ajouter les taxonomies aux arguments si définies
+    // Ajouter les taxonomies aux arguments 
     foreach ($filters as $taxonomy => $term_id) {
         $args['tax_query'][] = array(
             'taxonomy' => sanitize_key($taxonomy),

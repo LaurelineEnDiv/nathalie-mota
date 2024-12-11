@@ -1,14 +1,16 @@
 <footer>
 
     <div class="lightbox">
-        <img src="">
-        <div class="lightbox-meta">
-            <div class="lightbox-ref"></div>
-            <div class="lightbox-category"></div>
-        </div>
+        <figure>
+            <img src="">
+            <div class="lightbox-meta">
+                <div class="lightbox-ref"></div>
+                <div class="lightbox-category"></div>
+            </div>
+        </figure>
         <span class="close">&times;</span>
-        <span class="prev">&#10094;</span>
-        <span class="next">&#10095;</span>
+        <a href="#" class="prev"><i class="fas fa-arrow-left"></i> Précédente</a>
+        <a href="#" class="next">Suivante <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <nav class="footer-menu">

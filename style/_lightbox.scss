@@ -7,63 +7,78 @@
     background-color: rgba(0, 0, 0, 0.8);
     display: none;
     flex-direction: column; 
-    justify-content: center;
     align-items: center;
+    justify-content: center; 
     z-index: 9999;
+
+    &.active {
+        display: flex; 
+    }
+
+    figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto; 
+        max-width: 90%;
+
+        img {
+            max-width: 100%; /* Empêche l'image de dépasser le conteneur */
+            max-height: 70vh; /* Limite la hauteur à 70% de la fenêtre */
+            object-fit: contain;
+        }
+
+        .lightbox-meta {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1em;
+            color: white;
+            font-size: 14px;
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        user-select: none;
+        z-index: 10000;
+    }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px; 
+        color: white;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        z-index: 10000;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+
+    .prev {
+        left: 20px;
+        text-align: left;
+    }
+
+    .next {
+        right: 20px;
+        text-align: right;
+    }
+
+    .prev i, .next i {
+        font-size: 16px; 
+        margin: 0 8px; 
+    }
+
 }
 
-.lightbox.active {
-    display: flex; 
-}
-
-
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-}
-
-.lightbox-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    color: white;
-    font-size: 14px;
-}
-
-.lightbox-ref {
-    font-weight: bold;
-}
-
-.lightbox-category {
-    font-style: italic;
-    margin-top: 5px;
-}
-
-.lightbox .close,
-.lightbox .prev,
-.lightbox .next {
-    position: absolute;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    user-select: none;
-    z-index: 10000;
-}
-
-.lightbox .close {
-    top: 10px;
-    right: 20px;
-}
-
-.lightbox .prev {
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-}
-
-.lightbox .next {
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
