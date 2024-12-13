@@ -37,6 +37,7 @@ get_header(); ?>
         <div class="taxonomies">
             <div class="filter-group" data-taxonomy="categorie">
                 <span class="filter-title">Catégories</span>
+                <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <?php
                     $categories = get_terms(array(
@@ -51,6 +52,7 @@ get_header(); ?>
             </div>
             <div class="filter-group" data-taxonomy="format">
                 <span class="filter-title">Formats</span>
+                <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <?php
                     $formats = get_terms(array(
@@ -67,6 +69,7 @@ get_header(); ?>
         <div class="dates">
             <div class="filter-group" data-taxonomy="orderby">
                 <span class="filter-title">Trier par</span>
+                <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <div class="filter-option" data-term-id="DESC">Plus récentes</div>
                     <div class="filter-option" data-term-id="ASC">Plus anciennes</div>
@@ -79,9 +82,7 @@ get_header(); ?>
     <?php
     get_template_part('template_parts/photo_block', null, array(
         'post_type' => 'photo',
-        'posts_per_page' => 8, 
-        'orderby' => 'date',    
-        'order' => 'DESC',      
+        'posts_per_page' => 8,     
         'paged' => 1,          
     ));
     ?>

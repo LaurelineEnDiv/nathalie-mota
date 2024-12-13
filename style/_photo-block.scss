@@ -39,7 +39,7 @@
                 /* Initialement masqué avec opacity et visibility */
                 opacity: 0;
                 visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
+                transition: opacity 0.5s ease-in-out;
                 /* Empêche l'overlay d'intercepter les clics sauf sur les éléments enfants */
                 pointer-events: none;
                 z-index: 1;
@@ -55,10 +55,12 @@
                     background-color: black; 
                     width: 40px; /* Taille du cercle */
                     height: 40px;
-                    border-radius: 50%; /* Rend la forme circulaire */
+                    border-radius: 50%; 
                     display: flex;
                     justify-content: center; 
                     align-items: center;
+                    opacity: 0; 
+                    transition: opacity 0.5s ease-in-out; 
                 }
 
                 .eye-icon {
@@ -66,6 +68,8 @@
                     top: 50%;
                     left: 50%;
                     z-index: 2;
+                    opacity: 0; 
+                    transition: opacity 0.5s ease-in-out;
 
                     img {
                         width: 48px;
@@ -79,6 +83,8 @@
                     right: 10px;
                     font-size: 14px;
                     z-index: 2;
+                    opacity: 0; 
+                    transition: opacity 0.5s ease-in-out;
                 }
 
                 .photo-reference {
@@ -92,8 +98,15 @@
         .photo-item:hover .photo-overlay {
             opacity: 1;
             visibility: visible;
-            
+
+            .lightbox-icon,
+            .eye-icon,
+            .photo-reference,
+            .photo-category {
+                opacity: 1; 
+            }
         }
+
     }
 }
 

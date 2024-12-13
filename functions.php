@@ -46,9 +46,11 @@ add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 
 //Gérer les requêtes Ajax pour filtrer les photos
 function fetch_photos() {
-    // Vérifier et récupérer les filtres
+    //error_log("Données AJAX reçues : " . print_r($_POST, true));
+    
+    // Récupérer les paramètres envoyés par AJAX
     $filters = isset($_POST['filters']) ? $_POST['filters'] : array();
-    $order = isset($_POST['order']) ? sanitize_text_field($_POST['order']) : 'DESC';
+    $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'DESC';
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
     // Arguments WP_Query
@@ -56,34 +58,50 @@ function fetch_photos() {
         'post_type' => 'photo',
         'posts_per_page' => 8,
         'orderby' => 'date',
-        'order' => $order,
+        'order' => $orderby,
         'paged' => $paged,
     );
 
-    // Ajouter les taxonomies aux arguments 
-    foreach ($filters as $taxonomy => $term_id) {
-        $args['tax_query'][] = array(
-            'taxonomy' => sanitize_key($taxonomy),
-            'field' => 'term_id',
-            'terms' => intval($term_id),
-        );
+    // Ajouter les filtres de taxonomies
+    if (!empty($filters)) {
+        $args['tax_query'] = array(); // Initialiser la tax_query
+        foreach ($filters as $taxonomy => $term_id) {
+            $args['tax_query'][] = array(
+                'taxonomy' => sanitize_key($taxonomy),
+                'field' => 'term_id',
+                'terms' => intval($term_id),
+            );
+        }
     }
+    
+    // Exécutez la requête pour récupérer les photos
+    $photo_query = new WP_Query($args);
 
-    // WP_Query pour récupérer les photos
     ob_start();
     get_template_part('template_parts/photo_block', null, $args);
     $html = ob_get_clean();
 
+    // Vérifier s'il reste des pages à charger
+    $has_more = $photo_query->max_num_pages > $paged;
+
+    // Retourner la réponse AJAX avec les données et l'état `has_more`
     if (!empty($html)) {
-        wp_send_json_success(array('html' => $html));
+        wp_send_json_success(array(
+            'html' => $html,
+            'has_more' => $has_more, // Indique s'il y a d'autres pages
+        ));
     } else {
-        wp_send_json_error();
+        wp_send_json_success(array(
+            'html' => '',
+            'has_more' => false, // Aucun contenu supplémentaire
+        ));
     }
 
     wp_die();
 }
 add_action('wp_ajax_fetch_photos', 'fetch_photos');
 add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');
+
 
 ?>
 
