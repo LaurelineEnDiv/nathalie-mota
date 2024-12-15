@@ -36,7 +36,7 @@ get_header(); ?>
     <div class="filters-container">
         <div class="taxonomies">
             <div class="filter-group" data-taxonomy="categorie">
-                <span class="filter-title">Catégories</span>
+                <span class="filter-title" data-default-title="Catégories">Catégories</span>
                 <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <?php
@@ -51,7 +51,7 @@ get_header(); ?>
                 </div>
             </div>
             <div class="filter-group" data-taxonomy="format">
-                <span class="filter-title">Formats</span>
+                <span class="filter-title" data-default-title="Formats">Formats</span>
                 <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <?php
@@ -68,7 +68,7 @@ get_header(); ?>
         </div>
         <div class="dates">
             <div class="filter-group" data-taxonomy="orderby">
-                <span class="filter-title">Trier par</span>
+                <span class="filter-title" data-default-title="Trier par">Trier par</span>
                 <i class="fa-solid fa-chevron-down"></i>
                 <div class="filter-options">
                     <div class="filter-option" data-term-id="DESC">Plus récentes</div>
