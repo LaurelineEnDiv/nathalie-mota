@@ -5,8 +5,6 @@ jQuery(document).ready(function ($) {
         // Récupérer les filtres actifs
         $(".filter-group").each(function () {
             const taxonomy = $(this).data("taxonomy");
-
-            // Ignorer le groupe 'orderby' pour ne pas l'inclure dans les taxonomies
             if (taxonomy !== 'orderby') {
                 const selected = $(this).find(".filter-option.active").data("term-id");
                 if (selected) {
@@ -15,26 +13,23 @@ jQuery(document).ready(function ($) {
             }
         });
 
-        // Récupérer l'ordre trié
         const orderby = $(".filter-group[data-taxonomy='orderby'] .filter-option.active").data("term-id") || "DESC";
 
         const data = {
             action: "fetch_photos",
-            filters: filters, // Inclure seulement les taxonomies 
-            orderby: orderby, // Passer 'orderby' comme paramètre distinct
-            paged: 1, // Réinitialise la pagination lors d'un nouveau filtrage
+            filters: filters,
+            orderby: orderby,
+            paged: 1,
         };
 
         $("#loading").show();
 
         // Requête AJAX
         $.post(ajaxurl, data, function (response) {
-            //console.log("Données envoyées :", data);
             $("#loading").hide();
-            //vérifier si le contenu HTML retourné est vide. Si c'est le cas, le bouton "Charger plus" est masqué.
             if (response.success && response.data.html.trim()) {
                 $(".photo-block-container").html(response.data.html);
-                $("#load-more-photos").toggle(response.data.has_more); // Affiche ou masque selon has_more
+                $("#load-more-photos").toggle(response.data.has_more);
             } else {
                 $(".photo-block-container").html('<p>Aucune photo trouvée.</p>');
                 $("#load-more-photos").hide();
@@ -45,9 +40,9 @@ jQuery(document).ready(function ($) {
     // Activer un filtre au clic
     $(".filter-option").on("click", function () {
         const $group = $(this).closest(".filter-group");
-        $group.find(".filter-option").removeClass("active"); // Désactive les autres options
-        $(this).addClass("active"); // Active l'option cliquée
-        fetchPhotos(); // maj des photos avec les filtres actifs
+        $group.find(".filter-option").removeClass("active");
+        $(this).addClass("active");
+        fetchPhotos();
     });
 
     // Charger plus de photos
@@ -58,11 +53,8 @@ jQuery(document).ready(function ($) {
 
         const filters = {};
 
-        // Récupérer les filtres actifs
         $(".filter-group").each(function () {
             const taxonomy = $(this).data("taxonomy");
-
-            // Ignorer le groupe 'orderby' pour ne pas l'inclure dans les taxonomies
             if (taxonomy !== 'orderby') {
                 const selected = $(this).find(".filter-option.active").data("term-id");
                 if (selected) {
@@ -71,27 +63,42 @@ jQuery(document).ready(function ($) {
             }
         });
 
-        // Récupérer l'ordre trié
         const orderby = $(".filter-group[data-taxonomy='orderby'] .filter-option.active").data("term-id") || "DESC";
 
         const data = {
             action: "fetch_photos",
-            filters: filters, // Inclure seulement les filtres de taxonomies ici
-            orderby: orderby, // Passer 'orderby' comme paramètre distinct
+            filters: filters,
+            orderby: orderby,
             paged: paged,
         };
 
         $("#loading").show();
 
-        // Requête AJAX pour charger plus de photos
         $.post(ajaxurl, data, function (response) {
             $("#loading").hide();
             if (response.success && response.data.html.trim()) {
                 $(".photo-block").append(response.data.html);
-                $("#load-more-photos").toggle(response.data.has_more); // Affiche ou masque selon has_more
+                $("#load-more-photos").toggle(response.data.has_more);
             } else {
                 $("#load-more-photos").hide();
             }
         });
+    });
+
+    // Ouverture/fermeture de la liste des options au clic
+    $(".filter-title, .fa-chevron-down").on("click", function () {
+        
+        const $filterGroup = $(this).closest(".filter-group");
+        const $icon = $filterGroup.find("i.fa-solid");
+        const $options = $filterGroup.find(".filter-options");
+
+        // Basculer l'affichage des options
+        $options.slideToggle(200);
+
+        // Basculer les icônes
+        $icon.toggleClass("fa-chevron-down fa-chevron-up");
+
+        // Basculer la classe `open` sur le groupe de filtres
+        $filterGroup.toggleClass("open");
     });
 });

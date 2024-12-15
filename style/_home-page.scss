@@ -51,6 +51,15 @@
         border-radius: 8px;
         padding: 1em;
         cursor: pointer;
+
+        &.open {
+            border: 1.3px solid #215AFF;
+            border-radius: 8px 8px 0 0;
+
+            .filter-options {
+                display: block;
+            }
+        }
     
         .filter-title {
             font-family: "Poppins", sans-serif; 
@@ -62,15 +71,13 @@
             position: absolute;
             box-sizing: border-box;
             width: 260px;
-            top: 80%; 
+            top: 102%; 
             left: 0;
-            z-index: 1000;
             display: none; 
             background-color: white;
-            border: 1px solid #ccc;
-            border-top: none;
             border-radius: 0 0 8px 8px;
             padding: 5px 0;
+            z-index: 2;
     
             .filter-option {
                 padding: 10px;
@@ -93,9 +100,7 @@
     }
 }
 
-.filter-group:hover .filter-options {
-    display: block;
-}
+
 
 
 .load-more-container {
@@ -110,25 +115,6 @@
     }
 }
 
-
-
-/*
-select {
-        width:100%;
-        background-color: white;
-        font-family: "Poppins", sans-serif; 
-        font-size: 12px;
-        text-transform: uppercase;
-        padding: 1.5em 8em 1.5em 1.5em;   
-        border: solid 1.3px #B8BBC2;
-        border-radius: 8px;
-
-        @media (max-width: $mobile) { 
-            margin : 0 2em;
-            padding: 1.5em 4em 1.5em 1.5em;   
-        }
-    }
-*/
 
 
 

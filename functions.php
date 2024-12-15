@@ -45,6 +45,7 @@ add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 
 
 //Gérer les requêtes Ajax pour filtrer les photos
+
 function fetch_photos() {
     //error_log("Données AJAX reçues : " . print_r($_POST, true));
     
