@@ -43,12 +43,26 @@ Text Domain: nathalie-mota
 .filters-container {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  margin: 2em 0;
+  gap: 2em;
+  margin-top: 3em;
+}
+@media (max-width: 768px) {
+  .filters-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5em;
+    gap: 1em;
+  }
 }
 .filters-container .taxonomies {
   display: flex;
-  gap: 20px;
+  gap: 2em;
+}
+@media (max-width: 768px) {
+  .filters-container .taxonomies {
+    flex-direction: column;
+    gap: 1em;
+  }
 }
 .filters-container .filter-group {
   position: relative;
@@ -62,6 +76,16 @@ Text Domain: nathalie-mota
   border-radius: 8px;
   padding: 1em;
   cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .filters-container .filter-group {
+    width: 180px;
+  }
+}
+@media (max-width: 768px) {
+  .filters-container .filter-group {
+    width: 270px;
+  }
 }
 .filters-container .filter-group.open {
   border: 1.3px solid #215AFF;
@@ -85,6 +109,16 @@ Text Domain: nathalie-mota
   padding: 1em 0;
   z-index: 2;
 }
+@media (max-width: 1024px) {
+  .filters-container .filter-group .filter-options {
+    width: 180px;
+  }
+}
+@media (max-width: 768px) {
+  .filters-container .filter-group .filter-options {
+    width: 270px;
+  }
+}
 .filters-container .filter-group .filter-options .filter-option {
   padding: 1em;
   transition: background-color 0.3s;
@@ -106,9 +140,11 @@ Text Domain: nathalie-mota
   margin-bottom: 2em;
 }
 .load-more-container #load-more-photos {
+  width: 272px;
   background-color: #D8D8D8;
-  padding: 1em 6em;
+  padding: 1em 3em;
   border-radius: 2px;
+  text-align: center;
 }
 
 header, .mobile-header {
@@ -516,6 +552,7 @@ footer .footer-menu {
 @media (max-width: 768px) {
   .photo-block-container {
     grid-template-columns: 1fr;
+    margin: 1.5em 0 4em 0;
   }
 }
 .photo-block-container .photo-block {
@@ -527,14 +564,20 @@ footer .footer-menu {
 }
 .photo-block-container .photo-block .photo-item img {
   width: 100%;
-  height: 495px;
-  display: block;
+  height: auto;
+  /* Forcer les dimensions carrées */
+  aspect-ratio: 1/1; /* Format carré (1:1) */
   -o-object-fit: cover;
      object-fit: cover;
 }
+@media (max-width: 1024px) {
+  .photo-block-container .photo-block .photo-item img {
+    height: auto;
+  }
+}
 @media (max-width: 768px) {
   .photo-block-container .photo-block .photo-item img {
-    height: 278px;
+    height: auto;
   }
 }
 .photo-block-container .photo-block .photo-item .photo-overlay {
