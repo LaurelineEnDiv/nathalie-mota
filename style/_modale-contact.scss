@@ -5,12 +5,12 @@
     max-width: 100%;
     top: 0;
     left: 0;
-    width: 100vw; // toute la largeur visible
-    height: 100vh; // toute la hauteur visible
+    width: 100vw; 
+    height: 100vh; 
     background: rgba(0, 0, 0, 0.8); 
     z-index: 2;
     pointer-events: auto; /* Assure que l'overlay capte bien le clic */
-    transition: opacity 0.5s ease, linear 0.5s; /* Transition de 0.3s */
+    transition: opacity 0.5s ease, linear 0.5s; 
 
 
     &.active {

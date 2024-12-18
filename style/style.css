@@ -319,7 +319,7 @@ footer .footer-menu {
   background: rgba(0, 0, 0, 0.8);
   z-index: 2;
   pointer-events: auto; /* Assure que l'overlay capte bien le clic */
-  transition: opacity 0.5s ease, linear 0.5s; /* Transition de 0.3s */
+  transition: opacity 0.5s ease, linear 0.5s;
 }
 .modal-overlay.active {
   visibility: visible;
@@ -564,7 +564,7 @@ footer .footer-menu {
 }
 .photo-block-container .photo-block .photo-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
   /* Forcer les dimensions carrées */
   aspect-ratio: 1/1; /* Format carré (1:1) */
   -o-object-fit: cover;
@@ -572,12 +572,12 @@ footer .footer-menu {
 }
 @media (max-width: 1024px) {
   .photo-block-container .photo-block .photo-item img {
-    height: auto;
+    height: 100%;
   }
 }
 @media (max-width: 768px) {
   .photo-block-container .photo-block .photo-item img {
-    height: auto;
+    height: 100%;
   }
 }
 .photo-block-container .photo-block .photo-item .photo-overlay {

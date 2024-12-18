@@ -11,10 +11,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
     
-    // Ajoute un écouteur d'événement à chaque élément avec la classe .open-modale
+    // Ouvrir la modale au clic sur le lien Contact avec classe open-modale
     contactLinks.forEach(contact => {
         contact.addEventListener("click", (event) => {
             event.preventDefault();
+
+        //Ouverture de la modale avec champ Référence prérempli
             // Récupérer la référence de l'attribut data-ref
             const ref = contact.getAttribute("data-ref");
             // Préremplir le champ de référence photo si applicable
@@ -23,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 resetPhotoReferenceField(); // Réinitialiser si aucune référence n'est définie
             }
-            // Ouvrir la modale
+
+            // Ajout de la classe "active"
             modal.classList.add("active");
             overlay.classList.add("active");
             document.body.style.overflow = 'hidden'; // Empêche le défilement en arrière-plan

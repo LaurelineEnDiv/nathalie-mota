@@ -82,14 +82,13 @@ get_header(); ?>
     <?php
     get_template_part('template_parts/photo_block', null, array(
         'post_type' => 'photo',
-        'posts_per_page' => 8,     
-        'paged' => 1,          
+        'posts_per_page' => 8,             
     ));
     ?>
     </div>
 
     <div class="load-more-container">
-        <a href="#" id="load-more-photos" data-paged="1">Charger plus</a>
+        <a href="#" id="load-more-photos" data-offset="0">Charger plus</a>
     </div>
 </div>
 

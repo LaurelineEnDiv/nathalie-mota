@@ -24,7 +24,7 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 
 
 // Enregistre les emplacements de menus
-function theme_register_menus() {
+function register_menus() {
     register_nav_menus(
         array(
             'main-menu' => 'Menu Principal',
@@ -32,9 +32,9 @@ function theme_register_menus() {
         )
     );
 }
-add_action( 'init', 'theme_register_menus' );
+add_action( 'init', 'register_menus' );
 
-// Attribue la class "open-modale" au lien Contact du menu
+// Ajoute la classe "open-modale" au lien Contact du menu
 function add_contact_menu_class($atts, $item, $args) {
     if ($item->title == 'Contact') { // Titre du lien dans le menu WordPress
             $atts['class'] = 'open-modale'; // Ajoute la classe 
@@ -47,12 +47,12 @@ add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 //Gérer les requêtes Ajax pour filtrer les photos
 
 function fetch_photos() {
-    //error_log("Données AJAX reçues : " . print_r($_POST, true));
-    
     // Récupérer les paramètres envoyés par AJAX
     $filters = isset($_POST['filters']) ? $_POST['filters'] : array();
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'DESC';
-    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+
+    //$photos_loaded = 8;
 
     // Arguments WP_Query
     $args = array(
@@ -60,7 +60,7 @@ function fetch_photos() {
         'posts_per_page' => 8,
         'orderby' => 'date',
         'order' => $orderby,
-        'paged' => $paged,
+        'offset' => $offset,
     );
 
     // Ajouter les filtres de taxonomies
@@ -78,28 +78,29 @@ function fetch_photos() {
     // Exécutez la requête pour récupérer les photos
     $photo_query = new WP_Query($args);
 
+    // Récupérer les résultats
     ob_start();
+    //set_query_var('args', $args); // Utilisation de set_query_var pour transmettre les arguments
     get_template_part('template_parts/photo_block', null, $args);
     $html = ob_get_clean();
 
-    // Vérifier s'il reste des pages à charger
-    $has_more = $photo_query->max_num_pages > $paged;
+    // Calculer s'il reste des photos à charger
+    $total_photos = $photo_query->found_posts;
+    $has_more = ($offset + 8) < $total_photos;
 
-    // Retourner la réponse AJAX avec les données et l'état `has_more`
-    if (!empty($html)) {
-        wp_send_json_success(array(
-            'html' => $html,
-            'has_more' => $has_more, // Indique s'il y a d'autres pages
-        ));
-    } else {
-        wp_send_json_success(array(
-            'html' => '',
-            'has_more' => false, // Aucun contenu supplémentaire
-        ));
-    }
+    // Nettoyer les données globales de WordPress
+    //wp_reset_postdata();
+
+    // Retourner la réponse AJAX avec les données et le statut
+    wp_send_json_success(array(
+        'html' => $html,
+        'loaded' => $photo_query->post_count, // Nombre d'éléments chargés
+        'has_more' => $has_more, // Indique s'il reste des photos à afficher
+    ));
 
     wp_die();
 }
+
 add_action('wp_ajax_fetch_photos', 'fetch_photos');
 add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');
 

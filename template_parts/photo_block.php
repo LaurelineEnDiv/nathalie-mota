@@ -1,16 +1,15 @@
 <?php
+// Récupérer les arguments
+
+//$args = get_query_var('args');
 
 if (!isset($args)) {
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 8,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'paged' => 1, 
     );
 }
 
-error_log("Arguments WP_Query : " . print_r($args, true));
+//error_log("Arguments WP_Query : " . print_r($args, true));
 
 // Requête WP_Query avec les arguments 
 $query = new WP_Query($args);
