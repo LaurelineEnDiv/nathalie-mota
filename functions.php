@@ -1,4 +1,7 @@
 <?php
+// pour que le thème gère les balises title dynamiquement
+add_theme_support( 'title-tag' );
+
 //Charge le fichier style.css
 function theme_enqueue_styles() {
     wp_enqueue_style('main-style', get_template_directory_uri() . '/style/style.css');
@@ -45,14 +48,11 @@ add_filter('nav_menu_link_attributes', 'add_contact_menu_class', 10, 3);
 
 
 //Gérer les requêtes Ajax pour filtrer les photos
-
 function fetch_photos() {
     // Récupérer les paramètres envoyés par AJAX
     $filters = isset($_POST['filters']) ? $_POST['filters'] : array();
     $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'DESC';
-    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
-
-    //$photos_loaded = 8;
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 8;
 
     // Arguments WP_Query
     $args = array(
@@ -80,7 +80,6 @@ function fetch_photos() {
 
     // Récupérer les résultats
     ob_start();
-    //set_query_var('args', $args); // Utilisation de set_query_var pour transmettre les arguments
     get_template_part('template_parts/photo_block', null, $args);
     $html = ob_get_clean();
 
@@ -88,10 +87,7 @@ function fetch_photos() {
     $total_photos = $photo_query->found_posts;
     $has_more = ($offset + 8) < $total_photos;
 
-    // Nettoyer les données globales de WordPress
-    //wp_reset_postdata();
-
-    // Retourner la réponse AJAX avec les données et le statut
+    // Retourner la réponse AJAX 
     wp_send_json_success(array(
         'html' => $html,
         'loaded' => $photo_query->post_count, // Nombre d'éléments chargés
@@ -103,7 +99,6 @@ function fetch_photos() {
 
 add_action('wp_ajax_fetch_photos', 'fetch_photos');
 add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');
-
 
 ?>
 

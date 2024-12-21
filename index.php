@@ -1,10 +1,4 @@
-<?php
-// Protection contre les accès directs
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
-
-get_header(); ?>
+<?php get_header(); ?>
 
 <main>
     <?php
@@ -88,7 +82,7 @@ get_header(); ?>
     </div>
 
     <div class="load-more-container">
-        <a href="#" id="load-more-photos" data-offset="0">Charger plus</a>
+        <a href="#" id="load-more-photos" data-offset="8">Charger plus</a>
     </div>
 </div>
 

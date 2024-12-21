@@ -1,23 +1,19 @@
 jQuery(document).ready(function ($) {
-    function fetchPhotos(offset = 0, append = false) {
-        //console.log("Offset reçu dans fetchPhotos :", offset);
 
+    //Récupére les photos filtrées et/ou triées
+    function fetchPhotos(offset = 0, append = false) { //offset indique à partir de quelle position charger les photos.
         const filters = {};
         // Récupérer les filtres actifs
-        $(".filter-group").each(function () {
+        $(".taxonomies .filter-group").each(function () {
             const taxonomy = $(this).data("taxonomy");
-            // Ignorer le groupe 'orderby' pour ne pas l'inclure dans les taxonomies
-            if (taxonomy !== 'orderby') {
-                const selected = $(this).find(".filter-option.active").data("term-id");
+            const selected = $(this).find(".filter-option.active").data("term-id");
                 if (selected) {
                     filters[taxonomy] = selected;
                 }
-            }
         });
-
-        // Récupérer l'ordre trié
+        // Récupérer le tri par date
         const orderby = $(".filter-group[data-taxonomy='orderby'] .filter-option.active").data("term-id") || "DESC";
-
+        // Préparation des données Ajax
         const data = {
             action: "fetch_photos",
             filters: filters,
@@ -25,56 +21,75 @@ jQuery(document).ready(function ($) {
             offset: offset,
         };
 
-        //console.log("Données envoyées dans AJAX :", data);
-
-        // Requête AJAX
+        // Envoi de la requête AJAX
         $.post(ajaxurl, data, function (response) {
             if (response.success && response.data.html.trim()) {
+                //si la requête réussit, ajoute les phots
                 if (append) {
                     $(".photo-block-container").append(response.data.html);
                 } else {
                     $(".photo-block-container").html(response.data.html);
                 }
-                
-
-                // Mettre à jour l'offset 
+                // Met à jour l'offset 
                 const newOffset = offset + response.data.loaded; // `loaded` = nombre d'éléments chargés
                 $("#load-more-photos").data("offset", newOffset);
 
-                console.log("Offset initial mis à jour :", newOffset);
-
-
-                // Afficher ou masquer le bouton en fonction des résultats
+                // Visibilité du bouton "Charger plus"
                 if (response.data.has_more) {
                     $("#load-more-photos").show(); // Affiche le bouton si `has_more` est true
                 } else {
                     $("#load-more-photos").hide(); // Masque le bouton si `has_more` est false
                 }
+                
             } else {
-                if (!append) {
-                    $(".photo-block-container").html('<p>Aucune photo trouvée.</p>');
-                }
                 $("#load-more-photos").hide(); // Masque le bouton s'il n'y a pas de résultats
             }
         });
     }
 
-    // Charger plus de photos
+    // Gestion du bouton "Charger plus"
     $("#load-more-photos").on("click", function (e) {
         e.preventDefault();
-
         // Récupérer l'offset actuel du bouton
         const $button = $(this);
-        let offset = parseInt($button.data("offset")) || 0; // Utilisation de `data-offset`
+        let offset = parseInt($button.data("offset")) || 0;
 
-        console.log("Offset envoyé dans la requête AJAX :", offset)
+        // Mettre à jour l'offset dans le DOM
+        const newOffset = offset + 8;
+        $button.data("offset", newOffset);
         
-        fetchPhotos(offset, true); // Ajouter des photos sans écraser les existantes
+        // Passer le nouvel offset à fetchPhotos
+        fetchPhotos(offset, true); 
     });
 
-    // Gérer la sélection/désélection des options
-    $(".filter-option").on("click", function () {
 
+    // Ouverture/fermeture des options
+    $(".filter-title, .fa-chevron-down").on("click", function () {
+        const $filterGroup = $(this).closest(".filter-group");
+        const $icon = $filterGroup.find("i.fa-solid");
+        const $options = $filterGroup.find(".filter-options");
+        const $filterTitle = $filterGroup.find(".filter-title");
+        const defaultTitle = $filterTitle.data("default-title");
+
+        // Réinitialiser le titre par défaut
+        if ($options.is(":hidden")) {
+            $filterTitle.text(defaultTitle);
+            $filterGroup.removeClass("open");
+            $filterGroup.find(".filter-option").removeClass("active");
+            fetchPhotos(0);
+        }
+
+        // Affichage des options avec effet de glissement vertical
+        $options.slideToggle(200);
+        // Basculer les icônes
+        $icon.toggleClass("fa-chevron-down fa-chevron-up");
+        // Basculer la classe `open` sur le groupe de filtres
+        $filterGroup.toggleClass("open");
+    });
+    
+
+      // Sélection/désélection des options
+      $(".filter-option").on("click", function () {
         const $group = $(this).closest(".filter-group");
         const $filterTitle = $group.find(".filter-title");
         const defaultTitle = $filterTitle.data("default-title");
@@ -96,29 +111,6 @@ jQuery(document).ready(function ($) {
         $group.find(".filter-options").hide();
         $group.find("i.fa-solid").removeClass("fa-chevron-up").addClass("fa-chevron-down");
         fetchPhotos(0);
-    });
-
-    // Ouverture/fermeture de la liste des options
-    $(".filter-title, .fa-chevron-down").on("click", function () {
-        const $filterGroup = $(this).closest(".filter-group");
-        const $icon = $filterGroup.find("i.fa-solid");
-        const $options = $filterGroup.find(".filter-options");
-        const $filterTitle = $filterGroup.find(".filter-title");
-        const defaultTitle = $filterTitle.data("default-title");
-
-        // Réinitialiser le titre par défaut
-        if ($options.is(":hidden")) {
-            $filterTitle.text(defaultTitle);
-            $filterGroup.find(".filter-option").removeClass("active");
-            fetchPhotos(0);
-        }
-
-        // Affichage des options avec effet de glissement vertical
-        $options.slideToggle(200);
-        // Basculer les icônes
-        $icon.toggleClass("fa-chevron-down fa-chevron-up");
-        // Basculer la classe `open` sur le groupe de filtres
-        $filterGroup.toggleClass("open");
     });
 
 });
