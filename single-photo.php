@@ -60,7 +60,7 @@
                     // Initialisation de la boucle 
                     $args = array(
                         'post_type' => 'photo',
-                        'posts_per_page' => -1, // Charge toutes les photos
+                        'posts_per_page' => -1, // Charge toutes les photos sans limitation de nombre
                         'orderby' => 'date', // Tri par date
                         'order' => 'ASC', // Ordre ascendant
                     );

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //Ouverture de la modale avec champ Référence prérempli
             // Récupérer la référence de l'attribut data-ref
             const ref = contact.getAttribute("data-ref");
-            // Préremplir le champ de référence photo si applicable
+            // Si l'élément avec l'ID photo-reference-field existe (le champ de formulaire caché) et si une valeur ref a été récupérée
             if (photoReferenceField && ref) {
                 photoReferenceField.value = ref; // Préremplir le champ avec la référence
             } else {

@@ -86,11 +86,11 @@ header, .mobile-header {
 
         span {
             position: absolute;
-            width: 28px; /* Largeur de chaque barre */
-            height: 2px; /* Épaisseur de chaque barre */
-            background-color: #000; /* Couleur noire pour la croix */
-            border-radius: 2px; /* Coins arrondis (optionnel) */
-            transition: transform 0.3s ease-in-out; /* Animation fluide */
+            width: 28px; 
+            height: 2px; 
+            background-color: #000; 
+            border-radius: 2px; 
+            transition: transform 0.3s ease-in-out; 
 
             &:first-child {
                 transform: rotate(45deg);

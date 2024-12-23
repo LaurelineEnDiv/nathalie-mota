@@ -97,8 +97,8 @@ function fetch_photos() {
     wp_die();
 }
 
-add_action('wp_ajax_fetch_photos', 'fetch_photos');
-add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');
+add_action('wp_ajax_fetch_photos', 'fetch_photos'); //pour les utilisateurs connectés
+add_action('wp_ajax_nopriv_fetch_photos', 'fetch_photos');  //pour les utilisateurs non connectés
 
 ?>
 

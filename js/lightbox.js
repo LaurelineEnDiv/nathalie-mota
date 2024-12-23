@@ -9,10 +9,11 @@ jQuery(document).ready(function ($) {
         const imageUrl = $(this).data("image");
         const reference = $(this).data("ref");
         const category = $(this).data("category");
-        
+        //Déterminer l'indice de l'image cliquée
         currentImageIndex = $(".lightbox-icon").index(this);
 
         // Récupérer toutes les données nécessaires
+        // map pour parcourir toutes les .lightbox-icon et stocke leurs données dans les tableaux correspondants.
         images = $(".lightbox-icon").map(function () {
             return $(this).data("image");
         }).get();
@@ -25,7 +26,7 @@ jQuery(document).ready(function ($) {
             return $(this).data("category");
         }).get();
 
-        // Mettre à jour la lightbox
+        // Mettre à jour et afficher la lightbox
         updateLightboxContent(imageUrl, reference, category);
         $(".lightbox").addClass("active");
     });
@@ -33,13 +34,20 @@ jQuery(document).ready(function ($) {
     // Mettre à jour l'image, la référence et la catégorie dans la lightbox
     function updateLightboxContent(imageUrl, reference, category) {
         $(".lightbox img").attr("src", imageUrl);
-        $(".lightbox .lightbox-ref").text(reference || "Référence non disponible");
-        $(".lightbox .lightbox-category").text(category || "Catégorie non disponible");
+        $(".lightbox .lightbox-ref").text(reference);
+        $(".lightbox .lightbox-category").text(category);
     }
 
-    // Fermer la lightbox
+    // Fermer la lightbox au clic sur la croix
     $("body").on("click", ".lightbox .close", function () {
         $(".lightbox").removeClass("active");
+    });
+
+    // Fermer la lightbox en cliquant à l'extérieur de l'image
+    $(".lightbox").on("click", function (e) {
+        if ($(e.target).is(".lightbox")) {
+            $(".lightbox").removeClass("active");
+        }
     });
 
     // Afficher l'image suivante
@@ -60,10 +68,4 @@ jQuery(document).ready(function ($) {
         updateLightboxContent(imageUrl, reference, category);
     });
 
-    // Fermer la lightbox en cliquant à l'extérieur de l'image
-    $(".lightbox").on("click", function (e) {
-        if ($(e.target).is(".lightbox")) {
-            $(".lightbox").removeClass("active");
-        }
-    });
 });
