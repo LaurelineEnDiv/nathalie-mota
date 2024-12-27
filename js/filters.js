@@ -52,7 +52,8 @@ jQuery(document).ready(function ($) {
     });
 
     // Gestion de l'ouverture/fermeture des options
-    $(".filter-title, .fa-chevron-down").on("click", function () {
+    $(".filter-title, .fa-chevron-down").on("click", function (e) {
+        e.stopPropagation(); // Empêche la propagation pour éviter que l'événement global soit déclenché
         const $filterGroup = $(this).closest(".filter-group");
         const $icon = $filterGroup.find("i.fa-solid");
         const $options = $filterGroup.find(".filter-options");
@@ -91,6 +92,25 @@ jQuery(document).ready(function ($) {
             // Fermer la liste sans action supplémentaire
             $group.find(".filter-options").slideUp(200);
             $group.find("i.fa-solid").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+        }
+    });
+
+    // Réinitialisation des photos en cliquant en dehors des filtres
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest(".filter-group").length) {
+            // Réinitialiser tous les filtres
+            $(".filter-group").each(function () {
+                const $filterTitle = $(this).find(".filter-title");
+                const defaultTitle = $filterTitle.data("default-title");
+                $filterTitle.text(defaultTitle);
+                $(this).find(".filter-option").removeClass("selected");
+                $(this).removeClass("open");
+                $(this).find(".filter-options").hide();
+                $(this).find("i.fa-solid").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            });
+
+            // Charger les photos par défaut
+            fetchPhotos(0);
         }
     });
 });
