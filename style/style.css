@@ -130,8 +130,9 @@ Text Domain: nathalie-mota
 .filters-container .filter-group .filter-options .filter-option:active {
   background-color: #FE5858;
 }
-.filters-container .filter-group .filter-options .filter-option:focus {
+.filters-container .filter-group .filter-options .filter-option.selected {
   background-color: #E00000;
+  color: #FFFFFF;
 }
 
 .load-more-container {

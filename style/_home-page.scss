@@ -120,8 +120,9 @@
                     background-color: #FE5858; 
                 }
 
-                &:focus {
+                &.selected {
                     background-color: #E00000; 
+                    color: #FFFFFF;
                 }
             }
         }
